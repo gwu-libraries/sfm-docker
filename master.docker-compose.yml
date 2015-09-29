@@ -1,0 +1,24 @@
+sfmmasterrabbit:
+    image: rabbitmq:3-management
+    ports:
+        - "15672:15672"
+    restart: always
+    environment:
+        - RABBITMQ_DEFAULT_USER=sfm_user
+    env_file:
+        - ./secrets.env
+sfmmasterdb:
+    image: gwul/sfm-ui-db
+    env_file:
+        - ./secrets.env
+    restart: always
+sfmmasterapp:
+    image: gwul/sfm-ui:master
+    ports:
+        - "80:80"
+    links:
+        - sfmmasterdb:db
+    environment:
+        - SFM_DEBUG=True
+        - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
+    restart: always
