@@ -1,0 +1,3 @@
+pyrabbit==1.1.0
+splinter==0.7.3
+PyVirtualDisplay==0.1.5
