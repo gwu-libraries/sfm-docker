@@ -12,9 +12,13 @@ Smoke tests
 
         docker-compose -f master.docker-compose.yml up -d
 
-2. Run the tests.
+2. Pull the smoke test container.
 
-        docker run --rm --volume ~/Data/sfm3/sfm-docker:/opt/sfm-test --link sfmdocker_sfmmasterrabbit_1:mq --link sfmdocker_sfmmasterapp_1:ui gwul/sfm-docker-smoke
+        docker pull gwul/sfm-docker-smoke
+        
+3. Run the tests.
+
+        docker run --rm --link sfmdocker_sfmmasterrabbit_1:mq --link sfmdocker_sfmmasterapp_1:ui gwul/sfm-docker-smoke
 
 Notes:
 
