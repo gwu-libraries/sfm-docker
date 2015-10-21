@@ -22,3 +22,8 @@ sfmmasterapp:
         - SFM_DEBUG=True
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
     restart: always
+sfmmasterflickrharvester:
+    image: gwul/sfm-flickr-harvester:master
+    links:
+        - sfmmasterrabbit:mq
+    restart: always
