@@ -18,6 +18,7 @@ sfmmasterapp:
         - "80:80"
     links:
         - sfmmasterdb:db
+        - sfmmasterrabbit:mq
     environment:
         - SFM_DEBUG=True
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
