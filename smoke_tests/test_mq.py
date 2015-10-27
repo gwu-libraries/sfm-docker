@@ -19,7 +19,7 @@ class MqSmokeTest(unittest.TestCase):
             self.assertTrue(False, "Exchange not found.")
 
     def test_queues(self):
-        queues = self.cl.get_exchanges()
+        queues = self.cl.get_queues()
         queues_names = {queue["name"] for queue in queues}
         #Add additional queue names as new components are added.
         self.assertTrue(queues_names.issuperset(set(["flickr_harvester",])))

@@ -61,3 +61,6 @@ target/
 
 #Env files
 secrets.env
+
+#Local docker-compose files
+docker-compose.yml

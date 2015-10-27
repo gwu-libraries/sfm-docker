@@ -1,0 +1,30 @@
+sfmrabbit:
+    image: rabbitmq:3-management
+    ports:
+        - "15672:15672"
+    restart: always
+    environment:
+        - RABBITMQ_DEFAULT_USER=sfm_user
+    env_file:
+        - ./secrets.env
+sfmuidb:
+    image: gwul/sfm-ui-db:latest
+    env_file:
+        - ./secrets.env
+    restart: always
+sfmuiapp:
+    image: gwul/sfm-ui:0.2.0
+    ports:
+        - "80:80"
+    links:
+        - sfmuidb:db
+        - sfmrabbit:mq
+    environment:
+        - SFM_DEBUG=False
+        - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
+    restart: always
+sfmmflickrharvester:
+    image: gwul/sfm-flickr-harvester:0.2.0
+    links:
+        - sfmrabbit:mq
+    restart: always
