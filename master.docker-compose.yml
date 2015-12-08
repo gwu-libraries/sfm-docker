@@ -28,3 +28,13 @@ sfmmasterflickrharvester:
     links:
         - sfmmasterrabbit:mq
     restart: always
+sfmmastertwitterrestharvester:
+    image: gwul/sfm-twitter-rest-harvester:master
+    links:
+        - sfmmasterrabbit:mq
+    restart: always
+sfmmastertwitterstreamharvester:
+    image: gwul/sfm-twitter-stream-harvester:master
+    links:
+        - sfmmasterrabbit:mq
+    restart: always

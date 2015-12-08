@@ -9,8 +9,6 @@ class UiSmokeTest(unittest.TestCase):
             browser = Browser()
             browser.visit("http://ui")
 
-    #TODO: Unskip once testuser fixture is automatically created. See #37.
-    @unittest.skip("Skipped until testuser fixture is automatically created. See #37.")
     def test_login(self):
         with pyvirtualdisplay.Display():
             browser = Browser()
