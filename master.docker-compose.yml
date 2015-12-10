@@ -8,7 +8,7 @@ sfmmasterrabbit:
     env_file:
         - ./secrets.env
 sfmmasterdb:
-    image: gwul/sfm-ui-db
+    image: gwul/sfm-ui-db:master
     env_file:
         - ./secrets.env
     restart: always
