@@ -8,12 +8,12 @@ sfmrabbit:
     env_file:
         - ./secrets.env
 sfmuidb:
-    image: gwul/sfm-ui-db:0.3.0
+    image: gwul/sfm-ui-db:0.3.1
     env_file:
         - ./secrets.env
     restart: always
 sfmuiapp:
-    image: gwul/sfm-ui:0.3.0
+    image: gwul/sfm-ui:0.3.1
     ports:
         - "80:80"
     links:
@@ -29,12 +29,12 @@ sfmmflickrharvester:
         - sfmrabbit:mq
     restart: always
 sfmtwitterrestharvester:
-    image: gwul/sfm-twitter-rest-harvester:0.1.0
+    image: gwul/sfm-twitter-rest-harvester:0.1.1
     links:
         - sfmrabbit:mq
     restart: always
 sfmtwitterstreamharvester:
-    image: gwul/sfm-twitter-stream-harvester:0.1.0
+    image: gwul/sfm-twitter-stream-harvester:0.1.1
     links:
         - sfmrabbit:mq
     restart: always
