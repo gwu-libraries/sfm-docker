@@ -28,13 +28,19 @@ sfmmasterflickrharvester:
     links:
         - sfmmasterrabbit:mq
     restart: always
+    environment:
+        - DEBUG=True
 sfmmastertwitterrestharvester:
     image: gwul/sfm-twitter-rest-harvester:master
     links:
         - sfmmasterrabbit:mq
     restart: always
+    environment:
+        - DEBUG=True
 sfmmastertwitterstreamharvester:
     image: gwul/sfm-twitter-stream-harvester:master
     links:
         - sfmmasterrabbit:mq
     restart: always
+    environment:
+        - DEBUG=True
