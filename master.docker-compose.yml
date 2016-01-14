@@ -23,6 +23,8 @@ sfmmasterapp:
         - SFM_DEBUG=True
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
     restart: always
+    volumes_from:
+        - sfmmasterdata
 sfmmasterflickrharvester:
     image: gwul/sfm-flickr-harvester:master
     links:
@@ -30,6 +32,8 @@ sfmmasterflickrharvester:
     restart: always
     environment:
         - DEBUG=True
+    volumes_from:
+        - sfmmasterdata
 sfmmastertwitterrestharvester:
     image: gwul/sfm-twitter-rest-harvester:master
     links:
@@ -37,6 +41,8 @@ sfmmastertwitterrestharvester:
     restart: always
     environment:
         - DEBUG=True
+    volumes_from:
+        - sfmmasterdata
 sfmmastertwitterstreamharvester:
     image: gwul/sfm-twitter-stream-harvester:master
     links:
@@ -44,3 +50,10 @@ sfmmastertwitterstreamharvester:
     restart: always
     environment:
         - DEBUG=True
+    volumes_from:
+        - sfmmasterdata
+sfmmasterdata:
+    image: ubuntu:14.04
+    command: /bin/true
+    volumes:
+         - /sfm-data
