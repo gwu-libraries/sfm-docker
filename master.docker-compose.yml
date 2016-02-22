@@ -5,6 +5,7 @@ sfmmasterrabbit:
         - "15672:15672"
     restart: always
     environment:
+        - TZ=EST
         - RABBITMQ_DEFAULT_USER=sfm_user
     env_file:
         - ./secrets.env
@@ -12,6 +13,8 @@ sfmmasterdb:
     image: gwul/sfm-ui-db:master
     env_file:
         - ./secrets.env
+    environment:
+        - TZ=EST
     restart: always
 sfmmasterapp:
     image: gwul/sfm-ui:master
@@ -21,6 +24,7 @@ sfmmasterapp:
         - sfmmasterdb:db
         - sfmmasterrabbit:mq
     environment:
+        - TZ=EST
         - SFM_DEBUG=True
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
     restart: always
@@ -32,6 +36,7 @@ sfmmasterflickrharvester:
         - sfmmasterrabbit:mq
     restart: always
     environment:
+        - TZ=EST
         - DEBUG=True
     volumes_from:
         - sfmmasterdata
@@ -41,6 +46,7 @@ sfmmastertwitterrestharvester:
         - sfmmasterrabbit:mq
     restart: always
     environment:
+        - TZ=EST
         - DEBUG=True
     volumes_from:
         - sfmmasterdata
@@ -50,6 +56,7 @@ sfmmastertwitterstreamharvester:
         - sfmmasterrabbit:mq
     restart: always
     environment:
+        - TZ=EST
         - DEBUG=True
     volumes_from:
         - sfmmasterdata
