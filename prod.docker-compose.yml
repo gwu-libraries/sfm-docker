@@ -10,14 +10,14 @@ sfmrabbit:
     env_file:
         - ./secrets.env
 sfmuidb:
-    image: gwul/sfm-ui-db:0.3.1
+    image: gwul/sfm-ui-db:0.4.0
     env_file:
         - ./secrets.env
     environment:
         - TZ=EST
     restart: always
 sfmuiapp:
-    image: gwul/sfm-ui:0.3.1
+    image: gwul/sfm-ui:0.4.0
     ports:
         - "80:80"
     links:
@@ -31,7 +31,7 @@ sfmuiapp:
     volumes_from:
         - sfmdata
 sfmmflickrharvester:
-    image: gwul/sfm-flickr-harvester:0.2.0
+    image: gwul/sfm-flickr-harvester:0.3.0
     links:
         - sfmrabbit:mq
     restart: always
@@ -41,7 +41,7 @@ sfmmflickrharvester:
     volumes_from:
         - sfmdata
 sfmtwitterrestharvester:
-    image: gwul/sfm-twitter-rest-harvester:0.1.1
+    image: gwul/sfm-twitter-rest-harvester:0.2.0
     links:
         - sfmrabbit:mq
     restart: always
@@ -51,7 +51,7 @@ sfmtwitterrestharvester:
     volumes_from:
         - sfmdata
 sfmtwitterstreamharvester:
-    image: gwul/sfm-twitter-stream-harvester:0.1.1
+    image: gwul/sfm-twitter-stream-harvester:0.2.0
     links:
         - sfmrabbit:mq
     restart: always
