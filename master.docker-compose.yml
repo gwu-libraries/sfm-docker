@@ -1,4 +1,4 @@
-sfmmasterrabbit:
+sfmrabbit:
     image: rabbitmq@sha256:397382d2b222f3a298a6c74e93f348fb16f9a7fde2c02ba14122624d852daae3
     #RabbatMQ 3-management
     ports:
@@ -9,58 +9,68 @@ sfmmasterrabbit:
         - RABBITMQ_DEFAULT_USER=sfm_user
     env_file:
         - ./secrets.env
-sfmmasterdb:
+sfmdb:
     image: gwul/sfm-ui-db:master
     env_file:
         - ./secrets.env
     environment:
         - TZ=EST
     restart: always
-sfmmasterapp:
+sfmuiapp:
     image: gwul/sfm-ui:master
     ports:
         - "80:80"
     links:
-        - sfmmasterdb:db
-        - sfmmasterrabbit:mq
+        - sfmdb:db
+        - sfmrabbit:mq
     environment:
         - TZ=EST
         - SFM_DEBUG=True
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
     restart: always
     volumes_from:
-        - sfmmasterdata
-sfmmasterflickrharvester:
+        - sfmdata
+sfmflickrharvester:
     image: gwul/sfm-flickr-harvester:master
     links:
-        - sfmmasterrabbit:mq
+        - sfmrabbit:mq
     restart: always
     environment:
         - TZ=EST
         - DEBUG=True
     volumes_from:
-        - sfmmasterdata
-sfmmastertwitterrestharvester:
+        - sfmdata
+sfmflickrexporter:
+    image: gwul/sfm-flickr-exporter:master
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    restart: always
+    environment:
+        - DEBUG=True
+    volumes_from:
+        - sfmdata
+sfmtwitterrestharvester:
     image: gwul/sfm-twitter-rest-harvester:master
     links:
-        - sfmmasterrabbit:mq
+        - sfmrabbit:mq
     restart: always
     environment:
         - TZ=EST
         - DEBUG=True
     volumes_from:
-        - sfmmasterdata
-sfmmastertwitterstreamharvester:
+        - sfmdata
+sfmtwitterstreamharvester:
     image: gwul/sfm-twitter-stream-harvester:master
     links:
-        - sfmmasterrabbit:mq
+        - sfmrabbit:mq
     restart: always
     environment:
         - TZ=EST
         - DEBUG=True
     volumes_from:
-        - sfmmasterdata
-sfmmasterdata:
+        - sfmdata
+sfmdata:
     image: ubuntu:14.04
     command: /bin/true
     volumes:
