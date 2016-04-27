@@ -1,5 +1,5 @@
 sfmrabbit:
-    image: rabbitmq@sha256:397382d2b222f3a298a6c74e93f348fb16f9a7fde2c02ba14122624d852daae3
+    image: rabbitmq@sha256:a5180a37b0baebb938ee9d12dd11eed64a909288d7f344e24771278f8a122367
     #RabbitMQ 3-management
     ports:
         - "15672:15672"
@@ -10,14 +10,14 @@ sfmrabbit:
     env_file:
         - ./secrets.env
 sfmuidb:
-    image: gwul/sfm-ui-db:0.4.0
+    image: gwul/sfm-ui-db:0.5.0
     env_file:
         - ./secrets.env
     environment:
         - TZ=EST
     restart: always
 sfmuiapp:
-    image: gwul/sfm-ui:0.4.0
+    image: gwul/sfm-ui:0.5.0
     ports:
         - "80:80"
     links:
@@ -26,12 +26,13 @@ sfmuiapp:
     environment:
         - TZ=EST
         - SFM_DEBUG=False
+#       - SFM_ALLOWED_HOSTS=<ADD YOUR SERVER NAME HERE>
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
     restart: always
     volumes_from:
         - sfmdata
 sfmmflickrharvester:
-    image: gwul/sfm-flickr-harvester:0.3.0
+    image: gwul/sfm-flickr-harvester:0.4.0
     links:
         - sfmrabbit:mq
     restart: always
@@ -51,7 +52,7 @@ sfmmflickrharvester:
 #    volumes_from:
 #        - sfmdata
 sfmtwitterrestharvester:
-    image: gwul/sfm-twitter-rest-harvester:0.2.0
+    image: gwul/sfm-twitter-rest-harvester:0.3.0
     links:
         - sfmrabbit:mq
     restart: always
@@ -61,7 +62,7 @@ sfmtwitterrestharvester:
     volumes_from:
         - sfmdata
 sfmtwitterstreamharvester:
-    image: gwul/sfm-twitter-stream-harvester:0.2.0
+    image: gwul/sfm-twitter-stream-harvester:0.3.0
     links:
         - sfmrabbit:mq
     restart: always
