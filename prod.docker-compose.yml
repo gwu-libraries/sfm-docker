@@ -70,16 +70,39 @@ sfmtwitterstreamharvester:
         - DEBUG=False
     volumes_from:
         - sfmdata
-#sfmweiboharvester:
-#    image: gwul/sfm-weibo-harvester:X.X.X
-#    links:
-#        - sfmrabbit:mq
-#    restart: always
+sfmweiboharvester:
+    image: gwul/sfm-weibo-harvester:0.2.1
+    links:
+        - sfmrabbit:mq
+    restart: always
+    environment:
+        - TZ=EST
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+#sfmheritrix:
+#    image: gwul/sfm-heritrix:X.X.X
+#    ports:
+#        - "8443:8443"
+#    env_file:
+#        - ./secrets.env
 #    environment:
 #        - TZ=EST
-#        - DEBUG=True
 #    volumes_from:
 #        - sfmdata
+#    restart: always
+#sfmwebharvester:
+#    image: gwul/sfm-web-harvester:X.X.X
+#    links:
+#        - sfmrabbit:mq
+#        - sfmheritrix:heritrix
+#    environment:
+#        - TZ=EST
+#        - DEBUG=False
+#        - HERITRIX_CONTACT_URL=http://library.gwu.edu
+#    volumes_from:
+#        - sfmheritrix
+#    restart: always
 sfmdata:
     image: ubuntu:14.04
     command: /bin/true

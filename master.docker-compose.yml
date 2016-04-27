@@ -80,6 +80,29 @@ sfmweiboharvester:
         - DEBUG=True
     volumes_from:
         - sfmdata
+sfmheritrix:
+    image: gwul/sfm-heritrix:master
+    ports:
+        - "8443:8443"
+    env_file:
+        - ./secrets.env
+    environment:
+        - TZ=EST
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmwebharvester:
+    image: gwul/sfm-web-harvester:master
+    links:
+        - sfmrabbit:mq
+        - sfmheritrix:heritrix
+    environment:
+        - TZ=EST
+        - DEBUG=True
+        - HERITRIX_CONTACT_URL=http://library.gwu.edu
+    volumes_from:
+        - sfmheritrix
+    restart: always
 sfmdata:
     image: ubuntu:14.04
     command: /bin/true
