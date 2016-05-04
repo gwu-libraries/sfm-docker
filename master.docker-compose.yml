@@ -27,6 +27,10 @@ sfmuiapp:
         - TZ=EST
         - SFM_DEBUG=True
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
+        - SFM_HOST=sfm.gwu.edu:8080
+        - SFM_SMTP_HOST=smtp.gmail.com
+        - SFM_EMAIL_USER=justinlittman@email.gwu.edu
+        - SFM_EMAIL_PASSWORD=password
     restart: always
     volumes_from:
         - sfmdata

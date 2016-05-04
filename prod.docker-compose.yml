@@ -26,7 +26,10 @@ sfmuiapp:
     environment:
         - TZ=EST
         - SFM_DEBUG=False
-#       - SFM_ALLOWED_HOSTS=<ADD YOUR SERVER NAME HERE>
+        - SFM_HOST=sfm.gwu.edu:8080
+        - SFM_SMTP_HOST=smtp.gmail.com
+        - SFM_EMAIL_USER=justinlittman@email.gwu.edu
+        - SFM_EMAIL_PASSWORD=password
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
     restart: always
     volumes_from:
