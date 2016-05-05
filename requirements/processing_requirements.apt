@@ -2,5 +2,5 @@ wget
 zip
 python-dev
 jq
-vi
+vim
 git
