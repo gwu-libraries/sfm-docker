@@ -6,3 +6,4 @@ jq
 vim
 git
 libffi-dev
+libssl-dev
