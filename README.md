@@ -1,7 +1,7 @@
 SFM Docker
 ----------
 
-Provides docker-compose.yml files for deploying [Social Feed Manager](https://gwu-libraries.github.io/sfm-ui).
+Provides docker-compose.yml files for deploying [Social Feed Manager](http://gwu-libraries.github.io/sfm-ui).
 
 For instructions for deploying SFM using Docker, see [the docs](http://sfm.readthedocs.org/en/latest/install.html).
 
