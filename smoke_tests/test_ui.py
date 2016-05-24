@@ -15,7 +15,7 @@ class UiSmokeTest(unittest.TestCase):
             browser.visit("http://ui/accounts/login/")
             browser.fill("login", "testuser")
             browser.fill("password", "password")
-            browser.find_by_css(".primaryAction").click()
+            browser.find_by_css(".btn-primary").click()
             self.assertTrue(browser.find_by_text("Successfully signed in as testuser."))
 
     def test_admin_login(self):
