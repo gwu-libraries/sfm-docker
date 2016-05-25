@@ -24,4 +24,4 @@ CMD python setup.py install \
 # To build:
 # docker build -t gwul/sfm-processing:dev docker/dev/processing/
 # To run:
-# docker run -it --rm --link=docker_sfmapp_1:api --volumes-from=docker_sfmdata_1 --volume=/Users/justinlittman/Data/sfm3/sfm-twitter-harvester:/opt/sfm-twitter-harvester --volume=/Users/justinlittman/Data/sfm3/sfm-utils:/opt/sfm-utils gwul/sfm-processing:dev
+# docker run -it --rm --link=docker_sfmuiapp_1:api --volumes-from=docker_sfmdata_1 --volume=/Users/justinlittman/Data/sfm3/sfm-twitter-harvester:/opt/sfm-twitter-harvester --volume=/Users/justinlittman/Data/sfm3/sfm-utils:/opt/sfm-utils gwul/sfm-processing:dev

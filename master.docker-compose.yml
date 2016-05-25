@@ -7,14 +7,16 @@ sfmrabbit:
     environment:
         - TZ=EST
         - RABBITMQ_DEFAULT_USER=sfm_user
+    # From secrets.env, get rabbit user password.
     env_file:
         - ./secrets.env
 sfmdb:
     image: gwul/sfm-ui-db:master
-    env_file:
-        - ./secrets.env
     environment:
         - TZ=EST
+    # From secrets.env, get postgres password.
+    env_file:
+        - ./secrets.env
     restart: always
 sfmuiapp:
     image: gwul/sfm-ui:master
@@ -25,17 +27,14 @@ sfmuiapp:
         - sfmrabbit:mq
     environment:
         - TZ=EST
-        - SFM_DEBUG=True
-        - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
+        - SFM_DEBUG=False
         - SFM_HOST=sfm.gwu.edu:8080
         - SFM_SMTP_HOST=smtp.gmail.com
-        - SFM_EMAIL_USER=justinlittman@email.gwu.edu
-        - SFM_EMAIL_PASSWORD=password
-        #Provide credentials for the app. This will allow users to connect their accounts.
-        - TWITTER_CONSUMER_KEY=EHdoeW7ksBgflP5nUalEfhao
-        - TWITTER_CONSUMER_SECRET=ZtUemftBkf2cEmaqiyW2Ddihu9FPAiLebuMOmqN0jeQtXeAlen
-        #- WEIBO_API_KEY=
-        #- WEIBO_API_SECRET=
+        - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
+    # From secrets.env, get email configuration and site admin password.
+    # Also, optionally get twitter and weibo credentials.
+    env_file:
+        - ./secrets.env
     restart: always
     volumes_from:
         - sfmdata
@@ -93,10 +92,12 @@ sfmheritrix:
     image: gwul/sfm-heritrix:master
     ports:
         - "8443:8443"
-    env_file:
-        - ./secrets.env
     environment:
         - TZ=EST
+        - HERITRIX_USER=sfm_user
+    # From secrets.env, get heritrix user password.
+    env_file:
+        - ./secrets.env
     volumes_from:
         - sfmdata
     restart: always
