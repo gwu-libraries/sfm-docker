@@ -18,11 +18,11 @@ Smoke tests
         
 3. Run the tests.
 
-        docker run --rm --link sfmdocker_sfmmasterrabbit_1:mq --link sfmdocker_sfmmasterapp_1:ui gwul/sfm-docker-smoke
+        docker run --rm --link sfmdocker_sfmrabbit_1:mq --link sfmdocker_sfmuiapp_1:ui gwul/sfm-docker-smoke
 
 Notes:
 
-* The container names should be consistent (e.g., `sfmdocker_sfmmasterrabbit_1`).  However, if they're not get the
+* The container names should be consistent (e.g., `sfmdocker_sfmrabbit_1`).  However, if they're not get the
    correct names using `docker ps`.
 * While developing new tests, share a volume that contains the code.  For example, add 
    `--volume ~/sfm-docker:/opt/sfm-test` to `docker run`.
