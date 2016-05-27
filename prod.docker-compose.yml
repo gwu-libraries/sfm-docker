@@ -2,16 +2,17 @@ sfmrabbit:
     image: rabbitmq@sha256:a5180a37b0baebb938ee9d12dd11eed64a909288d7f344e24771278f8a122367
     # RabbitMQ 3-management
     ports:
+        # Opens up the ports for RabbitMQ management
         - "15672:15672"
-    restart: always
     environment:
         - TZ=EST
         - RABBITMQ_DEFAULT_USER=sfm_user
     # From secrets.env, get rabbit user password.
     env_file:
         - ./secrets.env
-sfmuidb:
-    image: gwul/sfm-ui-db:0.5.0
+    restart: always
+sfmdb:
+    image: gwul/sfm-ui-db:0.6.0
     environment:
         - TZ=EST
     # From secrets.env, get postgres password.
@@ -19,15 +20,22 @@ sfmuidb:
         - ./secrets.env
     restart: always
 sfmuiapp:
-    image: gwul/sfm-ui:0.5.0
+    image: gwul/sfm-ui:0.6.0
     ports:
         - "80:80"
     links:
-        - sfmuidb:db
+        - sfmdb:db
         - sfmrabbit:mq
     environment:
         - TZ=EST
+        # Logging options
         - SFM_DEBUG=False
+        #- SFM_DJANGO_LOG=DEBUG
+        #- SFM_DJANGO_REQUEST_LOG=DEBUG
+        #- SFM_APSCHEDULER_LOG=DEBUG
+        #- SFM_UI_LOG=DEBUG
+        # This is the public hostname and port. It is used for Django's ALLOWED_HOSTS
+        # and for links in emails.
         - SFM_HOST=sfm.gwu.edu:8080
         - SFM_SMTP_HOST=smtp.gmail.com
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
@@ -38,83 +46,122 @@ sfmuiapp:
     restart: always
     volumes_from:
         - sfmdata
-sfmmflickrharvester:
-    image: gwul/sfm-flickr-harvester:0.4.0
+    restart: always
+sfmflickrharvester:
+    image: gwul/sfm-flickr-harvester:0.5.0
     links:
         - sfmrabbit:mq
-    restart: always
     environment:
         - TZ=EST
         - DEBUG=False
     volumes_from:
         - sfmdata
-#sfmflickrexporter:
-#    image: gwul/sfm-flickr-exporter:X.X.X
-#    links:
-#        - sfmrabbit:mq
-#        - sfmuiapp:api
-#    restart: always
-#    environment:
-#        - DEBUG=False
-#    volumes_from:
-#        - sfmdata
+    restart: always
+sfmflickrexporter:
+    image: gwul/sfm-flickr-exporter:0.5.0
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
 sfmtwitterrestharvester:
-    image: gwul/sfm-twitter-rest-harvester:0.3.0
+    image: gwul/sfm-twitter-rest-harvester:0.4.0
     links:
         - sfmrabbit:mq
-    restart: always
     environment:
         - TZ=EST
         - DEBUG=False
     volumes_from:
         - sfmdata
+    restart: always
 sfmtwitterstreamharvester:
-    image: gwul/sfm-twitter-stream-harvester:0.3.0
+    image: gwul/sfm-twitter-stream-harvester:0.4.0
     links:
         - sfmrabbit:mq
-    restart: always
     environment:
         - TZ=EST
         - DEBUG=False
     volumes_from:
         - sfmdata
+    restart: always
+sfmtwitterrestexporter:
+    image: gwul/sfm-twitter-rest-exporter:0.4.0
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - TZ=EST
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmtwitterstreamexporter:
+    image: gwul/sfm-twitter-stream-exporter:0.4.0
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - TZ=EST
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
 sfmweiboharvester:
-    image: gwul/sfm-weibo-harvester:0.2.1
+    image: gwul/sfm-weibo-harvester:0.3.0
     links:
         - sfmrabbit:mq
-    restart: always
     environment:
         - TZ=EST
         - DEBUG=False
     volumes_from:
         - sfmdata
-#sfmheritrix:
-#    image: gwul/sfm-heritrix:X.X.X
-#    ports:
-#        - "8443:8443"
-#    # From secrets.env, get heritrix user password.
-#    env_file:
-#        - ./secrets.env
-#    environment:
-#        - TZ=EST
-#        - HERITRIX_USER=sfm_user
-#    volumes_from:
-#        - sfmdata
-#    restart: always
-#sfmwebharvester:
-#    image: gwul/sfm-web-harvester:X.X.X
-#    links:
-#        - sfmrabbit:mq
-#        - sfmheritrix:heritrix
-#    environment:
-#        - TZ=EST
-#        - DEBUG=False
-#        - HERITRIX_CONTACT_URL=http://library.gwu.edu
-#    volumes_from:
-#        - sfmheritrix
-#    restart: always
+    restart: always
+sfmweiborestexporter:
+    image: gwul/sfm-weibo-exporter:0.3.0
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - TZ=EST
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmheritrix:
+    image: gwul/sfm-heritrix:0.1.0
+    ports:
+        # Opens up the port for Heritrix admin console.
+        - "8443:8443"
+    environment:
+        - TZ=EST
+        - HERITRIX_USER=sfm_user
+    # From secrets.env, get heritrix user password.
+    env_file:
+        - ./secrets.env
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmwebharvester:
+    image: gwul/sfm-web-harvester:0.1.0
+    links:
+        - sfmrabbit:mq
+        - sfmheritrix:heritrix
+    environment:
+        - TZ=EST
+        - DEBUG=False
+        # Identifies the requester when harvesting web resources with Heritrix.
+        - HERITRIX_CONTACT_URL=http://library.gwu.edu
+    volumes_from:
+        - sfmheritrix
+    restart: always
 sfmdata:
     image: ubuntu:14.04
     command: /bin/true
     volumes:
+         # This declares a volume that is internal to docker.
          - /sfm-data
+         # This declares a volume that is linked to an external location.
+         # - "/src/sfm-data:/sfm-data"
