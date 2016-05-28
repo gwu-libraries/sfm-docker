@@ -36,6 +36,7 @@ sfmuiapp:
         #- SFM_UI_LOG=DEBUG
         # This is the public hostname and port. It is used for Django's ALLOWED_HOSTS
         # and for links in emails.
+        # FOR PRODUCTION, THIS MUST BE SET CORRECTLY OR YOU WILL GET A BAD REQUEST (400).
         - SFM_HOST=sfm.gwu.edu:8080
         - SFM_SMTP_HOST=smtp.gmail.com
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
@@ -120,7 +121,7 @@ sfmweiboharvester:
         - sfmdata
     restart: always
 sfmweiborestexporter:
-    image: gwul/sfm-weibo-exporter:0.3.0
+    image: gwul/sfm-weibo-exporter:0.3.2
     links:
         - sfmrabbit:mq
         - sfmuiapp:api

@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER Justin Littman <justinlittman@gwu.edu>
 
 
-ENV sfm_twitter_version 0.3.0
+ENV sfm_twitter_version 0.4.0
 
 # This pre-fetches the most recent requirements.apt.
 ADD https://raw.githubusercontent.com/gwu-libraries/sfm-docker/${sfm_twitter_version}/requirements/processing_requirements.apt /opt/sfm-setup/
