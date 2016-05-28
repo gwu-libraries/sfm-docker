@@ -111,7 +111,7 @@ sfmtwitterstreamexporter:
         - sfmdata
     restart: always
 sfmweiboharvester:
-    image: gwul/sfm-weibo-harvester:0.3.0
+    image: gwul/sfm-weibo-harvester:0.3.2
     links:
         - sfmrabbit:mq
     environment:
