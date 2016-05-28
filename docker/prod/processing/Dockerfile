@@ -3,9 +3,9 @@ MAINTAINER Justin Littman <justinlittman@gwu.edu>
 
 
 ENV sfm_twitter_version 0.4.0
-
+ENV sfm_docker_version 0.5.0
 # This pre-fetches the most recent requirements.apt.
-ADD https://raw.githubusercontent.com/gwu-libraries/sfm-docker/${sfm_twitter_version}/requirements/processing_requirements.apt /opt/sfm-setup/
+ADD https://raw.githubusercontent.com/gwu-libraries/sfm-docker/${sfm_docker_version}/requirements/processing_requirements.apt /opt/sfm-setup/
 RUN apt-get update
 RUN cat /opt/sfm-setup/processing_requirements.apt | tr "\n" " " | xargs apt-get install -y
 #Upgrade pip
