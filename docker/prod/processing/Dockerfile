@@ -16,6 +16,8 @@ RUN unzip ${sfm_twitter_version}.zip
 RUN mv sfm-twitter-harvester-${sfm_twitter_version} /opt/sfm-twitter-harvester
 WORKDIR /opt/sfm-twitter-harvester
 RUN pip install -r requirements/requirements.txt
+# Clone twarc so that have utilities
+RUN git clone https://github.com/edsu/twarc.git /opt/twarc
 CMD git -C /opt/twarc pull \
     && cd /sfm-data \
     && /bin/bash
