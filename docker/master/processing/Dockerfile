@@ -14,6 +14,7 @@ RUN unzip master.zip
 RUN mv sfm-twitter-harvester-master /opt/sfm-twitter-harvester
 WORKDIR /opt/sfm-twitter-harvester
 RUN pip install -r requirements/master.txt
+RUN python setup.py install
 # Clone twarc so that have utilities
 RUN git clone https://github.com/edsu/twarc.git /opt/twarc
 WORKDIR /opt/sfm-twitter-harvester
