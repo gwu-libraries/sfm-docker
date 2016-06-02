@@ -155,7 +155,7 @@ sfmwebharvester:
         # Identifies the requester when harvesting web resources with Heritrix.
         - HERITRIX_CONTACT_URL=http://library.gwu.edu
     volumes_from:
-        - sfmheritrix
+        - sfmdata
     restart: always
 sfmdata:
     image: ubuntu:14.04
