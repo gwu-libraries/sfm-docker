@@ -5,7 +5,7 @@ sfmrabbit:
         # Opens up the ports for RabbitMQ management
         - "15672:15672"
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - RABBITMQ_DEFAULT_USER=sfm_user
     # From secrets.env, get rabbit user password.
     env_file:
@@ -14,7 +14,7 @@ sfmrabbit:
 sfmdb:
     image: gwul/sfm-ui-db:master
     environment:
-        - TZ=EST
+        - TZ=America/New_York
     # From secrets.env, get postgres password.
     env_file:
         - ./secrets.env
@@ -29,7 +29,7 @@ sfmuiapp:
         - sfmdb:db
         - sfmrabbit:mq
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         # Logging options
         - SFM_DEBUG=True
         #- SFM_DJANGO_LOG=DEBUG
@@ -54,7 +54,7 @@ sfmflickrharvester:
     links:
         - sfmrabbit:mq
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - DEBUG=True
     volumes_from:
         - sfmdata
@@ -74,7 +74,7 @@ sfmtwitterrestharvester:
     links:
         - sfmrabbit:mq
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - DEBUG=True
     volumes_from:
         - sfmdata
@@ -84,7 +84,7 @@ sfmtwitterstreamharvester:
     links:
         - sfmrabbit:mq
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - DEBUG=True
     volumes_from:
         - sfmdata
@@ -95,7 +95,7 @@ sfmtwitterrestexporter:
         - sfmrabbit:mq
         - sfmuiapp:api
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - DEBUG=True
     volumes_from:
         - sfmdata
@@ -106,7 +106,7 @@ sfmtwitterstreamexporter:
         - sfmrabbit:mq
         - sfmuiapp:api
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - DEBUG=True
     volumes_from:
         - sfmdata
@@ -116,7 +116,7 @@ sfmweiboharvester:
     links:
         - sfmrabbit:mq
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - DEBUG=True
     volumes_from:
         - sfmdata
@@ -127,7 +127,7 @@ sfmweiborestexporter:
         - sfmrabbit:mq
         - sfmuiapp:api
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - DEBUG=True
     volumes_from:
         - sfmdata
@@ -138,7 +138,7 @@ sfmheritrix:
         # Opens up the port for Heritrix admin console.
         - "8443:8443"
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - HERITRIX_USER=sfm_user
     # From secrets.env, get heritrix user password.
     env_file:
@@ -152,7 +152,7 @@ sfmwebharvester:
         - sfmrabbit:mq
         - sfmheritrix:heritrix
     environment:
-        - TZ=EST
+        - TZ=America/New_York
         - DEBUG=True
         # Identifies the requester when harvesting web resources with Heritrix.
         - HERITRIX_CONTACT_URL=http://library.gwu.edu
