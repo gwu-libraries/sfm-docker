@@ -19,6 +19,8 @@ sfmdb:
     env_file:
         - ./secrets.env
     restart: always
+    volumes_from:
+        - sfmdata
 sfmuiapp:
     image: gwul/sfm-ui:0.6.1
     ports:
