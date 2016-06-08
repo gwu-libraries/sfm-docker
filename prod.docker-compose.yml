@@ -168,3 +168,19 @@ sfmdata:
          - /sfm-data
          # This declares a volume that is linked to an external location.
          # - "/src/sfm-data:/sfm-data"
+# Example sfm-elk container.
+#sfmelk:
+#    image: gwul/sfm-elk:0.0.0
+#    ports:
+#      # Kibana web interface
+#      - "5601:5601"
+#      # Elasticsearch JSON interface
+#      - "9200:9200"
+#      # Logstash server
+#      - "5000:5000"
+#    links:
+#      - sfmrabbit:mq
+#    volumes_from:
+#      - sfmdata:ro
+#    # To limit to a particular collection set.
+#    #command: --collection-set=04afb3d938aa468ca2a71de0824da126
