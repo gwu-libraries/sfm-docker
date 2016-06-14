@@ -12,7 +12,7 @@ sfmrabbit:
         - ./secrets.env
     restart: always
 sfmdb:
-    image: gwul/sfm-ui-db:0.6.1
+    image: gwul/sfm-ui-db:1.0.0
     environment:
         - TZ=America/New_York
     # From secrets.env, get postgres password.
@@ -22,7 +22,7 @@ sfmdb:
     volumes_from:
         - sfmdata
 sfmuiapp:
-    image: gwul/sfm-ui:0.6.1
+    image: gwul/sfm-ui:1.0.0
     ports:
         - "80:80"
     links:
@@ -51,7 +51,7 @@ sfmuiapp:
         - sfmdata
     restart: always
 sfmflickrharvester:
-    image: gwul/sfm-flickr-harvester:0.5.1
+    image: gwul/sfm-flickr-harvester:1.0.0
     links:
         - sfmrabbit:mq
     environment:
@@ -61,7 +61,7 @@ sfmflickrharvester:
         - sfmdata
     restart: always
 sfmflickrexporter:
-    image: gwul/sfm-flickr-exporter:0.5.1
+    image: gwul/sfm-flickr-exporter:1.0.0
     links:
         - sfmrabbit:mq
         - sfmuiapp:api
@@ -71,7 +71,7 @@ sfmflickrexporter:
         - sfmdata
     restart: always
 sfmtwitterrestharvester:
-    image: gwul/sfm-twitter-rest-harvester:0.4.1
+    image: gwul/sfm-twitter-rest-harvester:1.0.0
     links:
         - sfmrabbit:mq
     environment:
@@ -81,7 +81,7 @@ sfmtwitterrestharvester:
         - sfmdata
     restart: always
 sfmtwitterstreamharvester:
-    image: gwul/sfm-twitter-stream-harvester:0.4.1
+    image: gwul/sfm-twitter-stream-harvester:1.0.0
     links:
         - sfmrabbit:mq
     environment:
@@ -91,7 +91,7 @@ sfmtwitterstreamharvester:
         - sfmdata
     restart: always
 sfmtwitterrestexporter:
-    image: gwul/sfm-twitter-rest-exporter:0.4.1
+    image: gwul/sfm-twitter-rest-exporter:1.0.0
     links:
         - sfmrabbit:mq
         - sfmuiapp:api
@@ -102,7 +102,7 @@ sfmtwitterrestexporter:
         - sfmdata
     restart: always
 sfmtwitterstreamexporter:
-    image: gwul/sfm-twitter-stream-exporter:0.4.1
+    image: gwul/sfm-twitter-stream-exporter:1.0.0
     links:
         - sfmrabbit:mq
         - sfmuiapp:api
@@ -113,7 +113,7 @@ sfmtwitterstreamexporter:
         - sfmdata
     restart: always
 sfmweiboharvester:
-    image: gwul/sfm-weibo-harvester:0.3.3
+    image: gwul/sfm-weibo-harvester:1.0.0
     links:
         - sfmrabbit:mq
     environment:
@@ -123,7 +123,7 @@ sfmweiboharvester:
         - sfmdata
     restart: always
 sfmweiborestexporter:
-    image: gwul/sfm-weibo-exporter:0.3.3
+    image: gwul/sfm-weibo-exporter:1.0.0
     links:
         - sfmrabbit:mq
         - sfmuiapp:api
@@ -134,7 +134,7 @@ sfmweiborestexporter:
         - sfmdata
     restart: always
 sfmheritrix:
-    image: gwul/sfm-heritrix:0.1.1
+    image: gwul/sfm-heritrix:1.0.0
     ports:
         # Opens up the port for Heritrix admin console.
         - "8443:8443"
@@ -148,7 +148,7 @@ sfmheritrix:
         - sfmdata
     restart: always
 sfmwebharvester:
-    image: gwul/sfm-web-harvester:0.1.1
+    image: gwul/sfm-web-harvester:1.0.0
     links:
         - sfmrabbit:mq
         - sfmheritrix:heritrix
@@ -170,7 +170,7 @@ sfmdata:
          # - "/src/sfm-data:/sfm-data"
 # Example sfm-elk container.
 #sfmelk:
-#    image: gwul/sfm-elk:0.0.0
+#    image: gwul/sfm-elk:1.0.0
 #    ports:
 #      # Kibana web interface
 #      - "5601:5601"
