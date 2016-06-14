@@ -5,7 +5,7 @@ MAINTAINER Justin Littman <justinlittman@gwu.edu>
 ENV sfm_twitter_version 1.0.0
 ENV sfm_flickr_version 1.0.0
 ENV sfm_weibo_version 1.0.0
-ENV sfm_docker_version 0.6.1
+ENV sfm_docker_version 1.0.0
 # This pre-fetches the most recent requirements.apt.
 ADD https://raw.githubusercontent.com/gwu-libraries/sfm-docker/${sfm_docker_version}/requirements/processing_requirements.apt /opt/sfm-setup/
 RUN apt-get update
