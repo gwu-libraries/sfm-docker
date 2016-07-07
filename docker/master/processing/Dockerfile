@@ -42,8 +42,8 @@ RUN unzip /tmp/jwat-tools-0.6.2.zip -d /tmp/
 RUN mv /tmp/jwat-tools-0.6.2 /opt/jwat-tools
 WORKDIR /opt/sfm-twitter-harvester
 CMD git -C /opt/twarc pull \
-    && cd /sfm-data \
+    && cd /sfm-processing \
     && /bin/bash
 
 # To run:
-# docker run -it --rm --link=docker_sfmuiapp_1:api --volumes-from=docker_sfmdata_1 gwul/sfm-processing:master
+# docker run -it --rm --link=docker_sfmuiapp_1:api --volumes-from=docker_sfmdata_1:ro --volume=/home/justinlittman/sfm3/sfm-processing:/sfm-processing gwul/sfm-processing:master

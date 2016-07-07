@@ -8,3 +8,4 @@ git
 libffi-dev
 libssl-dev
 default-jre
+parallel

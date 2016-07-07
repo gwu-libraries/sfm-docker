@@ -37,7 +37,7 @@ CMD cd /opt/sfm-twitter-harvester \
     && pip install . \
     && pip install -r requirements/dev_no_warcprox.txt --upgrade \
     && git -C /opt/twarc pull \
-    && cd /sfm-data \
+    && cd /sfm-processing \
     && /bin/bash
 
 # To build:
@@ -45,5 +45,5 @@ CMD cd /opt/sfm-twitter-harvester \
 # add --no-cache if necessary
 
 # To run:
-# docker run -it --rm --link=docker_sfmuiapp_1:api --volumes-from=docker_sfmdata_1 --volume=/Users/justinlittman/Data/sfm3/sfm-twitter-harvester:/opt/sfm-twitter-harvester --volume=/Users/justinlittman/Data/sfm3/sfm-flickr-harvester:/opt/sfm-flickr-harvester --volume=/Users/justinlittman/Data/sfm3/sfm-weibo-harvester:/opt/sfm-weibo-harvester --volume=/Users/justinlittman/Data/sfm3/sfm-utils:/opt/sfm-utils gwul/sfm-processing:dev
+# docker run -it --rm --link=docker_sfmuiapp_1:api --volumes-from=docker_sfmdata_1 --volume=/Users/justinlittman/Data/sfm3/sfm-twitter-harvester:/opt/sfm-twitter-harvester --volume=/Users/justinlittman/Data/sfm3/sfm-flickr-harvester:/opt/sfm-flickr-harvester --volume=/Users/justinlittman/Data/sfm3/sfm-weibo-harvester:/opt/sfm-weibo-harvester --volume=/Users/justinlittman/Data/sfm3/sfm-utils:/opt/sfm-utils --volume=/Users/justinlittman/Data/sfm3/sfm-processing:/sfm-processing gwul/sfm-processing:dev
 # Note that volumes need to be absolute paths.

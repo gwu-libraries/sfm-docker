@@ -45,5 +45,5 @@ ADD https://bitbucket.org/nclarkekb/jwat-tools/downloads/jwat-tools-0.6.2.zip /t
 RUN unzip /tmp/jwat-tools-0.6.2.zip -d /tmp/
 RUN mv /tmp/jwat-tools-0.6.2 /opt/jwat-tools
 CMD git -C /opt/twarc pull \
-    && cd /sfm-data \
+    && cd /sfm-processing \
     && /bin/bash
