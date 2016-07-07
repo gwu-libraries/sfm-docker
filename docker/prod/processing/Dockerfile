@@ -2,6 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER Justin Littman <justinlittman@gwu.edu>
 
 
+ARG DEBIAN_FRONTEND=noninteractive
 ENV sfm_twitter_version 1.0.0
 ENV sfm_flickr_version 1.0.0
 ENV sfm_weibo_version 1.0.0

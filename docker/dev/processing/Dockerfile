@@ -1,6 +1,7 @@
 FROM ubuntu:14.04
 MAINTAINER Justin Littman <justinlittman@gwu.edu>
 
+ARG DEBIAN_FRONTEND=noninteractive
 # This pre-fetches the most recent requirements.apt.
 ADD https://raw.githubusercontent.com/gwu-libraries/sfm-docker/master/requirements/processing_requirements.apt /opt/sfm-setup/
 RUN apt-get update
