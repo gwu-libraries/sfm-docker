@@ -180,6 +180,6 @@ sfmdata:
 #    links:
 #      - sfmrabbit:mq
 #    volumes_from:
-#      - sfmdata:ro
+#      - sfmdata
 #    # To limit to a particular collection set.
 #    #command: --collection-set=04afb3d938aa468ca2a71de0824da126
