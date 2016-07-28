@@ -139,6 +139,8 @@ sfmheritrix:
         - "8443:8443"
     environment:
         - TZ=America/New_York
+        # Memory for heritrix
+        - JAVA_OPTS=-Xmx512M
         - HERITRIX_USER=sfm_user
     # From secrets.env, get heritrix user password.
     env_file:
