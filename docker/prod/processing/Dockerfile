@@ -7,6 +7,7 @@ ENV sfm_twitter_version 1.0.0
 ENV sfm_flickr_version 1.0.0
 ENV sfm_weibo_version 1.0.0
 ENV sfm_docker_version 1.0.0
+ENV sfm_tumblr_version 1.0.0
 # This pre-fetches the most recent requirements.apt.
 ADD https://raw.githubusercontent.com/gwu-libraries/sfm-docker/${sfm_docker_version}/requirements/processing_requirements.apt /opt/sfm-setup/
 RUN apt-get update
@@ -35,6 +36,14 @@ ADD https://github.com/gwu-libraries/sfm-weibo-harvester/archive/${sfm_weibo_ver
 RUN unzip ${sfm_weibo_version}.zip
 RUN mv sfm-weibo-harvester-${sfm_weibo_version} /opt/sfm-weibo-harvester
 WORKDIR /opt/sfm-weibo-harvester
+RUN pip install -r requirements/requirements.txt
+RUN pip install .
+# Tumblr
+WORKDIR /tmp
+ADD https://github.com/gwu-libraries/sfm-tumblr-harvester/archive/${sfm_tumblr_version}.zip /tmp/
+RUN unzip ${sfm_tumblr_version}.zip
+RUN mv sfm-tumblr-harvester-${sfm_tumblr_version} /opt/sfm-tumblr-harvester
+WORKDIR /opt/sfm-tumblr-harvester
 RUN pip install -r requirements/requirements.txt
 RUN pip install .
 # Clone twarc so that have utilities

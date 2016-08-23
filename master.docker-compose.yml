@@ -132,6 +132,27 @@ sfmweiborestexporter:
     volumes_from:
         - sfmdata
     restart: always
+sfmtumblrharvester:
+    image: gwul/sfm-tumblr-harvester:master
+    links:
+        - sfmrabbit:mq
+    environment:
+        - TZ=America/New_York
+        - DEBUG=True
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmtumblrexporter:
+    image: gwul/sfm-tumblr-exporter:master
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - TZ=America/New_York
+        - DEBUG=True
+    volumes_from:
+        - sfmdata
+    restart: always
 sfmheritrix:
     image: gwul/sfm-heritrix:master
     ports:
