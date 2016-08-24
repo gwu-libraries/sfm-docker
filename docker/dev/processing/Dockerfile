@@ -20,6 +20,10 @@ RUN pip install -r /tmp/requirements.txt
 ADD https://raw.githubusercontent.com/gwu-libraries/sfm-weibo-harvester/master/requirements/common.txt /tmp/
 ADD https://raw.githubusercontent.com/gwu-libraries/sfm-weibo-harvester/master/requirements/requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
+# Tumblr
+ADD https://raw.githubusercontent.com/gwu-libraries/sfm-tumblr-harvester/master/requirements/common.txt /tmp/
+ADD https://raw.githubusercontent.com/gwu-libraries/sfm-tumblr-harvester/master/requirements/requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
 # Clone twarc so that have utilities
 RUN git clone https://github.com/edsu/twarc.git /opt/twarc
 # Add warctools

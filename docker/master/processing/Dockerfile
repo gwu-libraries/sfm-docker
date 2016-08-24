@@ -32,6 +32,14 @@ RUN mv sfm-weibo-harvester-master /opt/sfm-weibo-harvester
 WORKDIR /opt/sfm-weibo-harvester
 RUN pip install -r requirements/master.txt
 RUN pip install .
+# Tumblr
+WORKDIR /tmp
+ADD https://github.com/gwu-libraries/sfm-tumblr-harvester/archive/master.zip /tmp/
+RUN unzip master.zip
+RUN mv sfm-tumblr-harvester-master /opt/sfm-tumblr-harvester
+WORKDIR /opt/sfm-tumblr-harvester
+RUN pip install -r requirements/master.txt
+RUN pip install .
 # Clone twarc so that have utilities
 RUN git clone https://github.com/edsu/twarc.git /opt/twarc
 # Add warctools
