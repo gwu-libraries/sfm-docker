@@ -6,8 +6,8 @@ from pyrabbit.api import Client
 class MqSmokeTest(unittest.TestCase):
     def setUp(self):
         self.cl = Client("mq:15672",
-                         os.environ.get("MQ_ENV_RABBITMQ_DEFAULT_USER"),
-                         os.environ.get("MQ_ENV_RABBITMQ_DEFAULT_PASS"))
+                         os.environ.get("RABBITMQ_USER"),
+                         os.environ.get("RABBITMQ_PASSWORD"))
         self.assertTrue(self.cl.is_alive())
 
     def test_exchange(self):

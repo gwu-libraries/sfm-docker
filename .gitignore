@@ -59,8 +59,7 @@ target/
 # PyCharm
 .idea/
 
-#Env files
-secrets.env
-
-#Local docker-compose files
+# Docker
+.env
 docker-compose.yml
+prod.docker-compose.yml

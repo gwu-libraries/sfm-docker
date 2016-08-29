@@ -1,0 +1,15 @@
+version: "2"
+services:
+    smoketests:
+#        build:
+#            context: .
+#            dockerfile: Dockerfile-smoketests
+        image: gwul/sfm-docker-smoke:master
+        links:
+            - mq:mq
+            - ui:ui
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD

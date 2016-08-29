@@ -1,0 +1,314 @@
+version: "2"
+services:
+    db:
+        image: gwul/sfm-ui-db:master
+        environment:
+            - POSTGRES_PASSWORD
+            - TZ
+        volumes_from:
+            - data
+        restart: always
+    mq:
+        # RabbitMQ 3-management
+        image: rabbitmq@sha256:a5180a37b0baebb938ee9d12dd11eed64a909288d7f344e24771278f8a122367
+        ports:
+            # Opens up the ports for RabbitMQ management
+            - "${RABBITMQ_MANAGEMENT_PORT}:15672"
+        environment:
+            - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+            - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+            - TZ
+        restart: always
+    # This container will exit on startup. That's OK.
+    data:
+        image: ubuntu:14.04
+        command: /bin/true
+        volumes:
+             - ${DATA_VOLUME}
+        environment:
+            - TZ
+    ui:
+        image: gwul/sfm-ui:${UI_TAG}
+        ports:
+            - "${SFM_PORT}:80"
+        links:
+            - db:db
+            - mq:mq
+        environment:
+            - SFM_DEBUG=${DEBUG}
+            - SFM_APSCHEDULER_LOG=DEBUG
+            - SFM_UI_LOG=DEBUG
+            # This adds a 5 minute schedule option to speed testing.
+            - SFM_FIVE_MINUTE_SCHEDULE=True
+            - TZ
+            - SFM_SITE_ADMIN_NAME
+            - SFM_SITE_ADMIN_EMAIL
+            - SFM_SITE_ADMIN_PASSWORD
+            - SFM_EMAIL_USER
+            - SFM_EMAIL_PASSWORD
+            - SFM_SMTP_HOST
+            - SFM_HOST=${SFM_HOSTNAME}:${SFM_PORT}
+            - TWITTER_CONSUMER_KEY
+            - TWITTER_CONSUMER_SECRET
+            - WEIBO_API_KEY
+            - WEIBO_API_SECRET
+            - TUMBLR_CONSUMER_KEY
+            - TUMBLR_CONSUMER_SECRET
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - POSTGRES_PASSWORD
+            # To have some test accounts created.
+            - LOAD_FIXTURES=True
+            - SFM_REQS
+        volumes_from:
+            - data:ro
+#        volumes:
+#            - "../sfm-ui:/opt/sfm-ui"
+#            # To also link in a local sfm-utils, uncomment this and set SFM_REQS to "dev" in .env
+#            - "../sfm-utils:/opt/sfm-utils"
+# Twitter
+    twitterrestharvester:
+        image: gwul/sfm-twitter-rest-harvester:master
+        links:
+            - mq:mq
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-twitter-harvester:/opt/sfm-twitter-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+    twitterstreamharvester:
+        image: gwul/sfm-twitter-stream-harvester:master
+        links:
+            - mq:mq
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-twitter-harvester:/opt/sfm-twitter-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+    twitterrestexporter:
+        image: gwul/sfm-twitter-rest-exporter:master
+        links:
+            - mq:mq
+            - ui:api
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-twitter-harvester:/opt/sfm-twitter-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+    twitterstreamexporter:
+        image: gwul/sfm-twitter-stream-exporter:master
+        links:
+            - mq:mq
+            - ui:api
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-twitter-harvester:/opt/sfm-twitter-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+
+# FLICKR
+    flickrharvester:
+        image: gwul/sfm-flickr-harvester:master
+        links:
+            - mq:mq
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-flickr-harvester:/opt/sfm-flickr-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+    flickrexporter:
+        image: gwul/sfm-flickr-exporter:master
+        links:
+            - mq:mq
+            - ui:api
+        environment:
+            - DEBUG
+            - TZ
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-flickr-harvester:/opt/sfm-flickr-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+# WEB
+    heritrix:
+        image:  gwul/sfm-heritrix:master
+        ports:
+            # Opens up the port for Heritrix admin console.
+            - "${HERITRIX_ADMIN_PORT}:8443"
+        environment:
+            - HERITRIX_USER
+            - HERITRIX_PASSWORD
+            # Memory for heritrix
+            - JAVA_OPTS=-Xmx512M
+        volumes_from:
+            - data
+    webharvester:
+        image: gwul/sfm-web-harvester:master
+        links:
+            - mq:mq
+            - heritrix:heritrix
+        environment:
+            - DEBUG
+            - HERITRIX_CONTACT_URL
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - HERITRIX_USER
+            - HERITRIX_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-web-harvester:/opt/sfm-web-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+
+# WEIBO
+    weiboharvester:
+        image: gwul/sfm-weibo-harvester:master
+        links:
+            - mq:mq
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-weibo-harvester:/opt/sfm-weibo-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+
+    weiboexporter:
+        image: gwul/sfm-weibo-exporter:master
+        links:
+            - mq:mq
+            - ui:api
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-weibo-harvester:/opt/sfm-weibo-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+
+# TUMBLR
+    tumblrharvester:
+        image: gwul/sfm-tumblr-harvester:master
+        links:
+            - mq:mq
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-tumblr-harvester:/opt/sfm-tumblr-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+    tumblrexporter:
+        image: gwul/sfm-tumblr-exporter:master
+        links:
+            - mq:mq
+            - ui:api
+        environment:
+            - TZ
+            - DEBUG
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS
+        volumes_from:
+            - data
+#        volumes:
+#            - "../sfm-tumblr-harvester:/opt/sfm-tumblr-harvester"
+#            - "../sfm-utils:/opt/sfm-utils"
+#            - "../warcprox:/opt/warcprox"
+
+# PROCESSING
+    # This container will exit on startup. That's OK.
+    processing:
+        image: gwul/sfm-processing:master
+        links:
+            - ui:ui
+        environment:
+            - TZ
+        volumes_from:
+            - data
+        volumes:
+             - ${PROCESSING_VOLUME}
+
+# ELK
+    # Multiple instances of this container can be included by duplicating this definition
+    # and changing ports and command.
+#    elk:
+#        image: gwul/sfm-elk:master
+#        ports:
+#          #Kibana web interface
+#          - "5601:5601"
+#          #Elasticsearch JSON interface
+#          - "9200:9200"
+#          #Logstash server
+#          - "5000:5000"
+##        volumes:
+##            - "../sfm-elk:/opt/sfm-elk"
+##            - "../sfm-twitter-harvester:/opt/sfm-twitter-harvester"
+##            - "../sfm-weibo-harvester:/opt/sfm-weibo-harvester"
+##            - "../sfm-utils:/opt/sfm-utils"
+#        links:
+#          - mq:mq
+#        volumes_from:
+#          - data
+#        environment:
+#            - TZ
+#            - DEBUG
+#            - RABBITMQ_USER
+#            - RABBITMQ_PASSWORD
+#         # To limit ELK loading to a specific collection.
+##        command: --collection=04afb3d938aa468ca2a71de0824da126

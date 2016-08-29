@@ -1,0 +1,13 @@
+FROM gwul/sfm-base@sha256:74fbacb81df7bb26f3efb67074b4b3fc2447bfd876d7197f932d08386cc068d0
+MAINTAINER Justin Littman <justinlittman@gwu.edu>
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    iceweasel \
+    xvfb
+
+ADD . /opt/sfm-test/
+WORKDIR /opt/sfm-test
+RUN pip install -r requirements/smoke_requirements.txt
+CMD appdeps.py --port-wait mq:5672 --port-wait ui:80 \
+    && python -m unittest discover
