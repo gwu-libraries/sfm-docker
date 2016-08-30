@@ -59,12 +59,12 @@ services:
             - POSTGRES_PASSWORD
             # To have some test accounts created.
             - LOAD_FIXTURES=True
-            - SFM_REQS
+            - SFM_REQS=${UI_REQS}
         volumes_from:
             - data:ro
 #        volumes:
 #            - "../sfm-ui:/opt/sfm-ui"
-#            # To also link in a local sfm-utils, uncomment this and set SFM_REQS to "dev" in .env
+#            # To also link in a local sfm-utils, uncomment this and set UI_REQS to "dev" in .env
 #            - "../sfm-utils:/opt/sfm-utils"
 # Twitter
     twitterrestharvester:
@@ -76,7 +76,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${TWITTER_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -92,7 +92,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${TWITTER_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -109,7 +109,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${TWITTER_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -126,7 +126,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${TWITTER_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -144,7 +144,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${FLICKR_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -161,7 +161,7 @@ services:
             - TZ
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${FLICKR_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -193,7 +193,7 @@ services:
             - RABBITMQ_PASSWORD
             - HERITRIX_USER
             - HERITRIX_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${WEB_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -210,7 +210,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${WEIBO_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -228,7 +228,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${WEIBO_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -246,7 +246,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${TUMBLR_REQS}
         volumes_from:
             - data
 #        volumes:
@@ -263,7 +263,7 @@ services:
             - DEBUG
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
-            - SFM_REQS
+            - SFM_REQS=${TUMBLR_REQS}
         volumes_from:
             - data
 #        volumes:
