@@ -39,7 +39,7 @@ services:
             - SFM_APSCHEDULER_LOG=DEBUG
             - SFM_UI_LOG=DEBUG
             # This adds a 5 minute schedule option to speed testing.
-            - SFM_FIVE_MINUTE_SCHEDULE=True
+            - SFM_FIVE_MINUTE_SCHEDULE=${FIVE_MINUTE_SCHEDULE}
             - TZ
             - SFM_SITE_ADMIN_NAME
             - SFM_SITE_ADMIN_EMAIL
@@ -58,7 +58,7 @@ services:
             - RABBITMQ_PASSWORD
             - POSTGRES_PASSWORD
             # To have some test accounts created.
-            - LOAD_FIXTURES=True
+            - LOAD_FIXTURES=${LOAD_FIXTURES}
             - SFM_REQS=${UI_REQS}
         volumes_from:
             - data:ro
