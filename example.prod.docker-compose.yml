@@ -224,7 +224,7 @@ services:
             - data
         restart: always
     tumblrexporter:
-        image: gwul/sfm-tumblr-exporter:1.1.0
+        image: gwul/sfm-tumblr-exporter:1.0.0
         links:
             - mq:mq
             - ui:api
