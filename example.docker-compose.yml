@@ -280,7 +280,7 @@ services:
         environment:
             - TZ
         volumes_from:
-            - data
+            - data:ro
         volumes:
              - ${PROCESSING_VOLUME}
 
