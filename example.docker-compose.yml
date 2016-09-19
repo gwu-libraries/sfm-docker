@@ -276,7 +276,7 @@ services:
     processing:
         image: gwul/sfm-processing:master
         links:
-            - ui:ui
+            - ui:api
         environment:
             - TZ
         volumes_from:
