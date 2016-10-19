@@ -89,9 +89,11 @@ services:
         environment:
             - TZ
             - DEBUG
+            - DEBUG_WARCPROX
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=${TWITTER_REQS}
+            - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
         logging:
             driver: json-file
             options:
@@ -110,9 +112,11 @@ services:
         environment:
             - TZ
             - DEBUG
+            - DEBUG_WARCPROX
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=${TWITTER_REQS}
+            - HARVEST_TRIES=${TWITTER_STREAM_HARVEST_TRIES}
         logging:
             driver: json-file
             options:
@@ -177,9 +181,11 @@ services:
         environment:
             - TZ
             - DEBUG
+            - DEBUG_WARCPROX
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=${FLICKR_REQS}
+            - HARVEST_TRIES=${FLICKR_HARVEST_TRIES}
         logging:
             driver: json-file
             options:
@@ -263,9 +269,11 @@ services:
         environment:
             - TZ
             - DEBUG
+            - DEBUG_WARCPROX
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=${WEIBO_REQS}
+            - HARVEST_TRIES=${WEIBO_HARVEST_TRIES}
         logging:
             driver: json-file
             options:
@@ -309,9 +317,11 @@ services:
         environment:
             - TZ
             - DEBUG
+            - DEBUG_WARCPROX
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=${TUMBLR_REQS}
+            - HARVEST_TRIES=${TUMBLR_HARVEST_TRIES}
         logging:
             driver: json-file
             options:
