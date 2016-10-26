@@ -29,12 +29,19 @@ services:
                 max-size: ${DOCKER_LOG_MAX_SIZE}
                 max-file: ${DOCKER_LOG_MAX_FILE}
         restart: always
-    # This container will exit on startup. That's OK.
+    # These containers will exit on startup. That's OK.
     data:
         image: ubuntu:14.04
         command: /bin/true
         volumes:
              - ${DATA_VOLUME}
+        environment:
+            - TZ
+    processingdata:
+        image: ubuntu:14.04
+        command: /bin/true
+        volumes:
+             - ${PROCESSING_VOLUME}
         environment:
             - TZ
     ui:
@@ -70,6 +77,8 @@ services:
             # To have some test accounts created.
             - LOAD_FIXTURES=False
             - SFM_REQS=release
+            - DATA_VOLUME_THRESHOLD
+            - PROCESSING_VOLUME_THRESHOLD
         logging:
             driver: json-file
             options:
@@ -77,6 +86,7 @@ services:
                 max-file: ${DOCKER_LOG_MAX_FILE}
         volumes_from:
             - data:ro
+            - processingdata:ro
         restart: always
 
 # Twitter
@@ -333,8 +343,7 @@ services:
                 max-file: ${DOCKER_LOG_MAX_FILE}
         volumes_from:
             - data:ro
-        volumes:
-             - ${PROCESSING_VOLUME}
+            - processingdata
 
 # ELK
     # Multiple instances of this container can be included by duplicating this definition
