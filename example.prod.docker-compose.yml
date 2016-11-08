@@ -85,7 +85,7 @@ services:
                 max-size: ${DOCKER_LOG_MAX_SIZE}
                 max-file: ${DOCKER_LOG_MAX_FILE}
         volumes_from:
-            - data:ro
+            - data
             - processingdata:ro
         restart: always
 
