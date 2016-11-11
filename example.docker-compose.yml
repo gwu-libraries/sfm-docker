@@ -73,6 +73,7 @@ services:
             - TUMBLR_CONSUMER_SECRET
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
+            - RABBITMQ_MANAGEMENT_PORT
             - POSTGRES_PASSWORD
             # To have some test accounts created.
             - LOAD_FIXTURES=${LOAD_FIXTURES}
