@@ -2,7 +2,6 @@ wget
 zip
 python-dev
 python-pip
-jq
 vim
 git
 libffi-dev

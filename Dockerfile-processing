@@ -50,5 +50,8 @@ ADD https://bitbucket.org/nclarkekb/jwat-tools/downloads/jwat-tools-0.6.2.zip /t
 RUN unzip /tmp/jwat-tools-0.6.2.zip -d /tmp/
 RUN mv /tmp/jwat-tools-0.6.2 /opt/jwat-tools
 
+# Newer version of JQ
+RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && mv jq-linux64 /usr/bin/jq && chmod +x /usr/bin/jq
+
 WORKDIR /sfm-processing
 CMD /bin/bash
