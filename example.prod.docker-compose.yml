@@ -373,5 +373,7 @@ services:
 #            options:
 #                max-size: ${DOCKER_LOG_MAX_SIZE}
 #                max-file: ${DOCKER_LOG_MAX_FILE}
-#         # To limit ELK loading to a specific collection set.
+#        # Set the hostname uniquely for each elk container
+#        hostname: myproject_elk
+#        # To limit ELK loading to a specific collection set.
 ##        command: --collection-set=04afb3d938aa468ca2a71de0824da126
