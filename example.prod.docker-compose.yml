@@ -31,14 +31,15 @@ services:
         restart: always
     # These containers will exit on startup. That's OK.
     data:
-        image: ubuntu:14.04
-        command: /bin/true
+        image: gwul/sfm-data:1.3.0
         volumes:
              - ${DATA_VOLUME}
         environment:
             - TZ
+            - SFM_UID
+            - SFM_GID
     processingdata:
-        image: ubuntu:14.04
+        image: debian:jessie
         command: /bin/true
         volumes:
              - ${PROCESSING_VOLUME}
@@ -47,7 +48,7 @@ services:
     ui:
         image: gwul/sfm-ui:1.3.1
         ports:
-            - "${SFM_PORT}:80"
+            - "${SFM_PORT}:8080"
         links:
             - db:db
             - mq:mq
@@ -82,6 +83,8 @@ services:
             - SFM_REQS=release
             - DATA_VOLUME_THRESHOLD
             - PROCESSING_VOLUME_THRESHOLD
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -104,6 +107,8 @@ services:
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
             - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -123,6 +128,8 @@ services:
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
             - HARVEST_TRIES=${TWITTER_STREAM_HARVEST_TRIES}
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -142,6 +149,8 @@ services:
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -161,6 +170,8 @@ services:
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -182,6 +193,8 @@ services:
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
             - HARVEST_TRIES=${FLICKR_HARVEST_TRIES}
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -201,6 +214,8 @@ services:
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -221,6 +236,8 @@ services:
             - HERITRIX_PASSWORD
             # Memory for heritrix
             - JAVA_OPTS=-Xmx512M
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -242,6 +259,8 @@ services:
             - HERITRIX_USER
             - HERITRIX_PASSWORD
             - SFM_REQS=release
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -263,6 +282,8 @@ services:
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
             - HARVEST_TRIES=${WEIBO_HARVEST_TRIES}
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -282,6 +303,8 @@ services:
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -303,6 +326,8 @@ services:
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
             - HARVEST_TRIES=${TUMBLR_HARVEST_TRIES}
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -322,6 +347,8 @@ services:
             - RABBITMQ_USER
             - RABBITMQ_PASSWORD
             - SFM_REQS=release
+            - SFM_UID
+            - SFM_GID
         logging:
             driver: json-file
             options:
@@ -370,6 +397,8 @@ services:
 #            - RABBITMQ_USER
 #            - RABBITMQ_PASSWORD
 #            - ES_HEAP_SIZE=2048m
+#            - SFM_UID
+#            - SFM_GID
 #        logging:
 #            driver: json-file
 #            options:
