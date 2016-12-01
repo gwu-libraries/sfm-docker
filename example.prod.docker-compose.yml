@@ -367,7 +367,7 @@ services:
 #            - DEBUG=False
 #            - RABBITMQ_USER
 #            - RABBITMQ_PASSWORD
-#            - ES_HEAP_SIZE=1024m
+#            - ES_HEAP_SIZE=2048m
 #        logging:
 #            driver: json-file
 #            options:
