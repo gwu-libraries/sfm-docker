@@ -57,6 +57,8 @@ services:
             - SFM_UI_LOG=DEBUG
             # This adds a 5 minute schedule option to speed testing.
             - SFM_FIVE_MINUTE_SCHEDULE=${FIVE_MINUTE_SCHEDULE}
+            # This adds a 100 item export segment for testing.
+            - SFM_HUNDRED_ITEM_SEGMENT=${HUNDRED_ITEM_SEGMENT}
             - TZ
             - SFM_SITE_ADMIN_NAME
             - SFM_SITE_ADMIN_EMAIL
