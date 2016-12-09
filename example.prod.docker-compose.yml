@@ -92,7 +92,7 @@ services:
                 max-file: ${DOCKER_LOG_MAX_FILE}
         volumes_from:
             - data
-            - processingdata:ro
+            - processingdata
         restart: always
 
 # Twitter

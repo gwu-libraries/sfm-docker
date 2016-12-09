@@ -92,7 +92,7 @@ services:
                 max-file: ${DOCKER_LOG_MAX_FILE}
         volumes_from:
             - data
-            - processingdata:ro
+            - processingdata
 #        volumes:
 #            - "../sfm-ui:/opt/sfm-ui"
 #            # To also link in a local sfm-utils, uncomment this and set UI_REQS to "dev" in .env
