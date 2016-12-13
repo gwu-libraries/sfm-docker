@@ -7,7 +7,7 @@ class UiSmokeTest(unittest.TestCase):
     def test_home(self):
         with pyvirtualdisplay.Display():
             browser = Browser()
-            browser.visit("http://ui")
+            browser.visit("http://ui:8080")
 
     def test_login(self):
         with pyvirtualdisplay.Display():
@@ -21,7 +21,7 @@ class UiSmokeTest(unittest.TestCase):
     def test_admin_login(self):
         with pyvirtualdisplay.Display():
             browser = Browser()
-            browser.visit("http://ui/admin/")
+            browser.visit("http://ui:8080/admin/")
             self.assertTrue(browser.find_by_text("Django administration"))
             browser.fill("username", "sfmadmin")
             browser.fill("password", "password")

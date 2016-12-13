@@ -9,5 +9,5 @@ RUN apt-get update && apt-get install -y \
 ADD . /opt/sfm-test/
 WORKDIR /opt/sfm-test
 RUN pip install -r requirements/smoke_requirements.txt
-CMD appdeps.py --wait-secs 90 --port-wait mq:5672 --port-wait ui:80 \
+CMD appdeps.py --wait-secs 90 --port-wait mq:5672 --port-wait ui:8080 \
     && python -m unittest discover
