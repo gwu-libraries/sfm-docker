@@ -12,7 +12,7 @@ class UiSmokeTest(unittest.TestCase):
     def test_login(self):
         with pyvirtualdisplay.Display():
             browser = Browser()
-            browser.visit("http://ui/accounts/login/")
+            browser.visit("http://ui:8080/accounts/login/")
             browser.fill("login", "testuser")
             browser.fill("password", "password")
             browser.find_by_css(".btn-primary").click()
