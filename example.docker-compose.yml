@@ -85,6 +85,7 @@ services:
             - PROCESSING_VOLUME_THRESHOLD
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -112,6 +113,7 @@ services:
             - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -137,6 +139,7 @@ services:
             - HARVEST_TRIES=${TWITTER_STREAM_HARVEST_TRIES}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -161,7 +164,8 @@ services:
             - SFM_REQS=${TWITTER_REQS}
             - SFM_UID
             - SFM_GID
-        logging:
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
+       logging:
             driver: json-file
             options:
                 max-size: ${DOCKER_LOG_MAX_SIZE}
@@ -185,6 +189,7 @@ services:
             - SFM_REQS=${TWITTER_REQS}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -212,6 +217,7 @@ services:
             - HARVEST_TRIES=${FLICKR_HARVEST_TRIES}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -236,6 +242,7 @@ services:
             - SFM_REQS=${FLICKR_REQS}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -282,7 +289,8 @@ services:
             - SFM_REQS=${WEB_REQS}
             - SFM_UID
             - SFM_GID
-        logging:
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
+       logging:
             driver: json-file
             options:
                 max-size: ${DOCKER_LOG_MAX_SIZE}
@@ -308,6 +316,7 @@ services:
             - HARVEST_TRIES=${WEIBO_HARVEST_TRIES}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -333,6 +342,7 @@ services:
             - SFM_REQS=${WEIBO_REQS}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -360,6 +370,7 @@ services:
             - HARVEST_TRIES=${TUMBLR_HARVEST_TRIES}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
@@ -384,6 +395,7 @@ services:
             - SFM_REQS=${TUMBLR_REQS}
             - SFM_UID
             - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
         logging:
             driver: json-file
             options:
