@@ -165,7 +165,7 @@ services:
             - SFM_UID
             - SFM_GID
             - SFM_UPGRADE_REQS=${UPGRADE_REQS}
-       logging:
+        logging:
             driver: json-file
             options:
                 max-size: ${DOCKER_LOG_MAX_SIZE}
@@ -290,7 +290,7 @@ services:
             - SFM_UID
             - SFM_GID
             - SFM_UPGRADE_REQS=${UPGRADE_REQS}
-       logging:
+        logging:
             driver: json-file
             options:
                 max-size: ${DOCKER_LOG_MAX_SIZE}
