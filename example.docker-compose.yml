@@ -68,6 +68,7 @@ services:
             - SFM_EMAIL_PASSWORD
             - SFM_SMTP_HOST
             - SFM_HOST=${SFM_HOSTNAME}:${SFM_PORT}
+            - SFM_CONTACT_EMAIL
             - TWITTER_CONSUMER_KEY
             - TWITTER_CONSUMER_SECRET
             - WEIBO_API_KEY
@@ -86,6 +87,8 @@ services:
             - SFM_UID
             - SFM_GID
             - SFM_UPGRADE_REQS=${UPGRADE_REQS}
+            - SFM_INSTITUTION_NAME
+            - SFM_INSTITUTION_LINK
         logging:
             driver: json-file
             options:
