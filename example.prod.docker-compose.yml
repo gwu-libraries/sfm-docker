@@ -94,7 +94,34 @@ services:
             - data
             - processingdata
         restart: always
-
+    uiconsumer:
+        image: gwul/sfm-ui-consumer:${SFM_VERSION}
+        links:
+            - db:db
+            - mq:mq
+            - ui:ui
+        environment:
+            - SFM_DEBUG=False
+            - SFM_APSCHEDULER_LOG=INFO
+            - SFM_UI_LOG=INFO
+            - TZ
+            - SFM_SITE_ADMIN_NAME
+            - SFM_SITE_ADMIN_EMAIL
+            - SFM_SITE_ADMIN_PASSWORD
+            - SFM_EMAIL_USER
+            - SFM_EMAIL_PASSWORD
+            - SFM_SMTP_HOST
+            - SFM_HOST=${SFM_HOSTNAME}:${SFM_PORT}
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - POSTGRES_PASSWORD
+            - SFM_REQS=release
+            - SFM_UID
+            - SFM_GID
+        volumes_from:
+            - data
+            - processingdata
+        restart: always
 # Twitter
     twitterrestharvester:
         image: gwul/sfm-twitter-rest-harvester:${SFM_VERSION}
