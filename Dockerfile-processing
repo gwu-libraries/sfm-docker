@@ -8,7 +8,7 @@ RUN apt-get update
 RUN cat /opt/sfm-setup/processing_requirements.apt | tr "\n" " " | xargs apt-get install -y
 
 #Upgrade pip
-RUN pip install pip==7.1.2
+RUN pip install pip==9.0.1
 #Avoid the warning of https
 RUN pip install --upgrade ndg-httpsclient
 
