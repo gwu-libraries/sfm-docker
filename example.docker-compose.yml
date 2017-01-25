@@ -483,6 +483,10 @@ services:
 #            - DEBUG
 #            - RABBITMQ_USER
 #            - RABBITMQ_PASSWORD
+#            # The amount of memory for Elasticsearch.
+#            # This is the minimal memory allowed.
+#            # For larger indexes, consider adding more memory.
+#            #  See https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html
 #            - ES_HEAP_SIZE=2048m
 #            - SFM_UID
 #            - SFM_GID
