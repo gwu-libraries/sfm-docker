@@ -88,6 +88,8 @@ services:
             - SFM_GID
             - SFM_INSTITUTION_NAME
             - SFM_INSTITUTION_LINK
+            - SFM_MONITOR_QUEUE_HOUR_INTERVAL
+            - SFM_SCAN_FREE_SPACE_HOUR_INTERVAL
         logging:
             driver: json-file
             options:
