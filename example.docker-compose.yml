@@ -91,6 +91,7 @@ services:
             - SFM_INSTITUTION_LINK
             - SFM_MONITOR_QUEUE_HOUR_INTERVAL
             - SFM_SCAN_FREE_SPACE_HOUR_INTERVAL
+            - SFM_WEIBO_SEARCH_OPTION
         logging:
             driver: json-file
             options:
