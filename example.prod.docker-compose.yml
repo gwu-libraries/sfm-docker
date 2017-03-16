@@ -14,8 +14,8 @@ services:
             - data
         restart: always
     mq:
-        # RabbitMQ 3-management
-        image: rabbitmq@sha256:a5180a37b0baebb938ee9d12dd11eed64a909288d7f344e24771278f8a122367
+        image: gwul/sfm-rabbitmq:${SFM_VERSION}
+        hostname: mq
         ports:
             # Opens up the ports for RabbitMQ management
             - "${RABBITMQ_MANAGEMENT_PORT}:15672"
@@ -28,6 +28,8 @@ services:
             options:
                 max-size: ${DOCKER_LOG_MAX_SIZE}
                 max-file: ${DOCKER_LOG_MAX_FILE}
+        volumes_from:
+            - data
         restart: always
     # These containers will exit on startup. That's OK.
     data:
