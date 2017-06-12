@@ -144,6 +144,29 @@ services:
             - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
             - SFM_UID
             - SFM_GID
+            - PRIORITY_QUEUES=False
+        logging:
+            driver: json-file
+            options:
+                max-size: ${DOCKER_LOG_MAX_SIZE}
+                max-file: ${DOCKER_LOG_MAX_FILE}
+        volumes_from:
+            - data
+        restart: always
+    twitterpriorityrestharvester:
+        image: gwul/sfm-twitter-rest-harvester:1.8.0
+        links:
+            - mq:mq
+        environment:
+            - TZ
+            - DEBUG=False
+            - RABBITMQ_USER
+            - RABBITMQ_PASSWORD
+            - SFM_REQS=release
+            - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
+            - SFM_UID
+            - SFM_GID
+            - PRIORITY_QUEUES=True
         logging:
             driver: json-file
             options:
