@@ -533,6 +533,7 @@ services:
 #            - LS_JAVA_OPTS=-Xms2g -Xmx2g
 #            - TZ
 #            - DEBUG=false
+#            - SFM_REQS=release
 #            - RABBITMQ_USER
 #            - RABBITMQ_PASSWORD
 #            - SFM_UID
@@ -639,6 +640,7 @@ services:
 #            - LS_JAVA_OPTS=-Xms2g -Xmx2g
 #            - TZ
 #            - DEBUG=false
+#            - SFM_REQS=release
 #            - RABBITMQ_USER
 #            - RABBITMQ_PASSWORD
 #            - SFM_UID

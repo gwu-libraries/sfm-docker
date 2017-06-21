@@ -595,6 +595,7 @@ services:
 #            - LS_JAVA_OPTS=-Xms2g -Xmx2g
 #            - TZ
 #            - DEBUG
+#            - SFM_REQS=${ELK_REQS}
 #            - RABBITMQ_USER
 #            - RABBITMQ_PASSWORD
 #            - SFM_UID
@@ -707,6 +708,7 @@ services:
 #            - LS_JAVA_OPTS=-Xms2g -Xmx2g
 #            - TZ
 #            - DEBUG
+#            - SFM_REQS=${ELK_REQS}
 #            - RABBITMQ_USER
 #            - RABBITMQ_PASSWORD
 #            - SFM_UID
