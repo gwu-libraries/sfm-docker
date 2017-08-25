@@ -70,6 +70,7 @@ services:
             - SFM_EMAIL_PASSWORD
             - SFM_SMTP_HOST
             - SFM_HOST=${SFM_HOSTNAME}:${SFM_PORT}
+            - SFM_HOSTNAME
             - SFM_CONTACT_EMAIL
             - TWITTER_CONSUMER_KEY
             - TWITTER_CONSUMER_SECRET
@@ -94,6 +95,10 @@ services:
             - SFM_MONITOR_QUEUE_HOUR_INTERVAL
             - SFM_SCAN_FREE_SPACE_HOUR_INTERVAL
             - SFM_WEIBO_SEARCH_OPTION
+            - SFM_USE_HTTPS
+            # For ngninx-proxy
+            - VIRTUAL_HOST=${SFM_HOSTNAME}
+            - VIRTUAL_PORT=${SFM_PORT}
         logging:
             driver: json-file
             options:
@@ -106,6 +111,27 @@ services:
 #            - "../sfm-ui:/opt/sfm-ui"
 #            # To also link in a local sfm-utils, uncomment this and set UI_REQS to "dev" in .env
 #            - "../sfm-utils:/opt/sfm-utils"
+#    # For running SFM with HTTPS
+#    # When using this, in .env, SFM_PORT must be 8080 and USE_HTTPS must be True.
+#    # For more information on configuration of nginx-proxy, see https://github.com/jwilder/nginx-proxy
+#    nginx-proxy:
+#        image: jwilder/nginx-proxy
+#        ports:
+#            - "443:443"
+#            - "80:80"
+#        environment:
+#            - DEFAULT_HOST=${SFM_HOSTNAME}
+#        logging:
+#            driver: json-file
+#            options:
+#                max-size: ${DOCKER_LOG_MAX_SIZE}
+#                max-file: ${DOCKER_LOG_MAX_FILE}
+#        volumes:
+#            - /var/run/docker.sock:/tmp/docker.sock:ro
+#            # This should point to your local key and certificate
+#            # Make sure in the cert that the server cert comes before the intermediate certs.
+#            - "./server.crt:/etc/nginx/certs/${SFM_HOSTNAME}.crt"
+#            - "./server.key:/etc/nginx/certs/${SFM_HOSTNAME}.key"
     uiconsumer:
         image: gwul/sfm-ui-consumer:master
         links:
@@ -131,6 +157,7 @@ services:
             - SFM_UID
             - SFM_GID
             - SFM_UPGRADE_REQS=${UPGRADE_REQS}
+            - SFM_USE_HTTPS
         volumes_from:
             - data
             - processingdata
