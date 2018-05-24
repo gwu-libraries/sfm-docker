@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Justin Littman <justinlittman@gwu.edu>
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -8,7 +8,7 @@ RUN apt-get update
 RUN cat /opt/sfm-setup/processing_requirements.apt | tr "\n" " " | xargs apt-get install -y
 
 #Upgrade pip
-RUN pip install pip==9.0.1
+RUN pip install pip==10.0.1
 #Avoid the warning of https
 RUN pip install --upgrade ndg-httpsclient
 
@@ -50,8 +50,18 @@ ADD https://bitbucket.org/nclarkekb/jwat-tools/downloads/jwat-tools-0.6.2.zip /t
 RUN unzip /tmp/jwat-tools-0.6.2.zip -d /tmp/
 RUN mv /tmp/jwat-tools-0.6.2 /opt/jwat-tools
 
-# Newer version of JQ
-RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && mv jq-linux64 /usr/bin/jq && chmod +x /usr/bin/jq
+# Add CSVKit
+RUN pip install csvkit
+
+# Add gron
+ADD https://github.com/tomnomnom/gron/releases/download/v0.5.2/gron-linux-amd64-0.5.2.tgz /tmp/
+WORKDIR /tmp
+RUN tar xzf gron-linux-amd64-0.5.2.tgz
+RUN mv gron /usr/local/bin/
+
+# Add sync scripts
+ADD docker/processing/*.sh /opt/processing/
+RUN chmod +x /opt/processing/*.sh
 
 WORKDIR /sfm-processing
 CMD /bin/bash

@@ -8,3 +8,5 @@ libffi-dev
 libssl-dev
 default-jre
 parallel
+jq
+curl
