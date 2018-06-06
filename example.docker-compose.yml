@@ -349,53 +349,6 @@ services:
 #            - "../sfm-flickr-harvester:/opt/sfm-flickr-harvester"
 #            - "../sfm-utils:/opt/sfm-utils"
 #            - "../warcprox:/opt/warcprox"
-# WEB
-    heritrix:
-        image:  gwul/sfm-heritrix:master
-        ports:
-            # Opens up the port for Heritrix admin console.
-            - "${HERITRIX_ADMIN_PORT}:8443"
-        environment:
-            - HERITRIX_USER
-            - HERITRIX_PASSWORD
-            # Memory for heritrix
-            - JAVA_OPTS=-Xmx512M
-            - SFM_UID
-            - SFM_GID
-        logging:
-            driver: json-file
-            options:
-                max-size: ${DOCKER_LOG_MAX_SIZE}
-                max-file: ${DOCKER_LOG_MAX_FILE}
-        volumes_from:
-            - data
-    webharvester:
-        image: gwul/sfm-web-harvester:master
-        links:
-            - mq:mq
-            - heritrix:heritrix
-        environment:
-            - DEBUG
-            - HERITRIX_CONTACT_URL
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
-            - HERITRIX_USER
-            - HERITRIX_PASSWORD
-            - SFM_REQS=${WEB_REQS}
-            - SFM_UID
-            - SFM_GID
-            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
-        logging:
-            driver: json-file
-            options:
-                max-size: ${DOCKER_LOG_MAX_SIZE}
-                max-file: ${DOCKER_LOG_MAX_FILE}
-        volumes_from:
-            - data
-#        volumes:
-#            - "../sfm-web-harvester:/opt/sfm-web-harvester"
-#            - "../sfm-utils:/opt/sfm-utils"
-
 # WEIBO
     weiboharvester:
         image: gwul/sfm-weibo-harvester:master

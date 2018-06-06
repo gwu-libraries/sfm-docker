@@ -310,52 +310,6 @@ services:
         volumes_from:
             - data
         restart: always
-
-# WEB
-    heritrix:
-        image:  gwul/sfm-heritrix:1.11.0
-        ports:
-            # Opens up the port for Heritrix admin console.
-            - "${HERITRIX_ADMIN_PORT}:8443"
-        environment:
-            - HERITRIX_USER
-            - HERITRIX_PASSWORD
-            # Memory for heritrix
-            - JAVA_OPTS=-Xmx512M
-            - SFM_UID
-            - SFM_GID
-        logging:
-            driver: json-file
-            options:
-                max-size: ${DOCKER_LOG_MAX_SIZE}
-                max-file: ${DOCKER_LOG_MAX_FILE}
-        volumes_from:
-            - data
-        restart: always
-    webharvester:
-        image: gwul/sfm-web-harvester:1.11.0
-        links:
-            - mq:mq
-            - heritrix:heritrix
-        environment:
-            - DEBUG=False
-            - HERITRIX_CONTACT_URL
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
-            - HERITRIX_USER
-            - HERITRIX_PASSWORD
-            - SFM_REQS=release
-            - SFM_UID
-            - SFM_GID
-        logging:
-            driver: json-file
-            options:
-                max-size: ${DOCKER_LOG_MAX_SIZE}
-                max-file: ${DOCKER_LOG_MAX_FILE}
-        volumes_from:
-            - data
-        restart: always
-
 # WEIBO
     weiboharvester:
         image: gwul/sfm-weibo-harvester:1.11.0
