@@ -1,6 +1,7 @@
 wget
 zip
 python-dev
+python3-dev
 python-pip
 vim
 git
