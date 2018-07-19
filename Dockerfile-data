@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Justin Littman <justinlittman@gwu.edu>
+MAINTAINER Social Feed Manager <sfm@gwu.edu>
 
 ARG DEBIAN_FRONTEND=noninteractive
 

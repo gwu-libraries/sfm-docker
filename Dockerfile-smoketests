@@ -1,5 +1,5 @@
 FROM gwul/sfm-base@sha256:bf84472ee4819b86a90a39c184f190b5ab769026eb427fe784625f3148490e55
-MAINTAINER Justin Littman <justinlittman@gwu.edu>
+MAINTAINER Social Feed Manager <sfm@gwu.edu>
 
 RUN apt-get update && apt-get install -y \
     wget \
