@@ -68,6 +68,7 @@ services:
             - SFM_SITE_ADMIN_PASSWORD
             - SFM_EMAIL_USER
             - SFM_EMAIL_PASSWORD
+            - SFM_EMAIL_FROM
             - SFM_SMTP_HOST
             - SFM_HOST=${SFM_HOSTNAME}:${SFM_PORT}
             - SFM_HOSTNAME
@@ -145,6 +146,7 @@ services:
             - SFM_SITE_ADMIN_PASSWORD
             - SFM_EMAIL_USER
             - SFM_EMAIL_PASSWORD
+            - SFM_EMAIL_FROM
             - SFM_SMTP_HOST
             - SFM_HOST=${SFM_HOSTNAME}:${SFM_PORT}
             - RABBITMQ_USER
