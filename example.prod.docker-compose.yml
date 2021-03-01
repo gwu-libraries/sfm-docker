@@ -35,7 +35,11 @@ services:
     data:
         image: gwul/sfm-data:2.3.0
         volumes:
-             - ${DATA_VOLUME}
+             - ${DATA_VOLUME_MQ}
+             - ${DATA_VOLUME_DB}
+             - ${DATA_VOLUME_EXPORT}
+             - ${DATA_VOLUME_CONTAINERS}
+             - ${DATA_VOLUME_COLLECTION_SET}
         environment:
             - TZ
             - SFM_UID
