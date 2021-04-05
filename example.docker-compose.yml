@@ -90,6 +90,8 @@ services:
             - SFM_POSTGRES_PASSWORD
             - SFM_POSTGRES_HOST
             - SFM_POSTGRES_PORT
+            - SFM_RABBITMQ_MANAGEMENT_PORT
+            - SFM_POSTGRES_PASSWORD
             # To have some test accounts created.
             - LOAD_FIXTURES=${LOAD_FIXTURES}
             - SFM_REQS=${UI_REQS}
