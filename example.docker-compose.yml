@@ -101,6 +101,7 @@ services:
             - SFM_SCAN_FREE_SPACE_HOUR_INTERVAL
             - SFM_WEIBO_SEARCH_OPTION
             - SFM_USE_HTTPS
+            - SFM_USE_ELB
             # For ngninx-proxy
             - VIRTUAL_HOST=${SFM_HOSTNAME}
             - VIRTUAL_PORT=${SFM_PORT}
