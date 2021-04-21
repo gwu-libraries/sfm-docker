@@ -20,8 +20,8 @@ services:
             # Opens up the ports for RabbitMQ management
             - "${RABBITMQ_MANAGEMENT_PORT}:15672"
         environment:
-            - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
-            - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+            - RABBITMQ_DEFAULT_USER=${SFM_RABBITMQ_USER}
+            - RABBITMQ_DEFAULT_PASS=${SFM_RABBITMQ_PASSWORD}
             - TZ
         logging:
             driver: json-file
@@ -79,9 +79,11 @@ services:
             - WEIBO_API_SECRET
             - TUMBLR_CONSUMER_KEY
             - TUMBLR_CONSUMER_SECRET
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
-            - RABBITMQ_MANAGEMENT_PORT
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
+            - SFM_RABBITMQ_MANAGEMENT_PORT
             - POSTGRES_PASSWORD
             # To have some test accounts created.
             - LOAD_FIXTURES=False
@@ -154,8 +156,10 @@ services:
             - SFM_EMAIL_FROM
             - SFM_SMTP_HOST
             - SFM_HOST=${SFM_HOSTNAME}:${SFM_PORT}
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - POSTGRES_PASSWORD
             - SFM_REQS=release
             - SFM_UID
@@ -173,8 +177,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
             - SFM_UID
@@ -195,8 +201,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
             - SFM_UID
@@ -217,8 +225,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - HARVEST_TRIES=${TWITTER_STREAM_HARVEST_TRIES}
             - SFM_UID
@@ -239,8 +249,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - SFM_UID
             - SFM_GID
@@ -260,8 +272,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - SFM_UID
             - SFM_GID
@@ -282,8 +296,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - HARVEST_TRIES=${FLICKR_HARVEST_TRIES}
             - SFM_UID
@@ -304,8 +320,10 @@ services:
         environment:
             - DEBUG=False
             - TZ
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - SFM_UID
             - SFM_GID
@@ -325,8 +343,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - HARVEST_TRIES=${WEIBO_HARVEST_TRIES}
             - SFM_UID
@@ -347,8 +367,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - SFM_UID
             - SFM_GID
@@ -369,8 +391,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - HARVEST_TRIES=${TUMBLR_HARVEST_TRIES}
             - SFM_UID
@@ -391,8 +415,10 @@ services:
         environment:
             - TZ
             - DEBUG=False
-            - RABBITMQ_USER
-            - RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=release
             - SFM_UID
             - SFM_GID
