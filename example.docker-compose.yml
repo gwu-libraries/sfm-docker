@@ -81,7 +81,8 @@ services:
             - TUMBLR_CONSUMER_SECRET
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
-            - SFM_RABBITMQ_MANAGEMENT_PORT
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_POSTGRES_PASSWORD
             # To have some test accounts created.
             - LOAD_FIXTURES=${LOAD_FIXTURES}
@@ -159,6 +160,8 @@ services:
             - SFM_HOST=${SFM_HOSTNAME}:${SFM_PORT}
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_POSTGRES_PASSWORD
             - SFM_REQS=${UI_REQS}
             - SFM_UID
@@ -183,6 +186,8 @@ services:
             - DEBUG_WARCPROX
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${TWITTER_REQS}
             - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
             - SFM_UID
@@ -210,6 +215,8 @@ services:
             - DEBUG_WARCPROX
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${TWITTER_REQS}
             - HARVEST_TRIES=${TWITTER_REST_HARVEST_TRIES}
             - SFM_UID
@@ -237,6 +244,8 @@ services:
             - DEBUG_WARCPROX
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${TWITTER_REQS}
             - HARVEST_TRIES=${TWITTER_STREAM_HARVEST_TRIES}
             - SFM_UID
@@ -263,6 +272,8 @@ services:
             - DEBUG
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${TWITTER_REQS}
             - SFM_UID
             - SFM_GID
@@ -288,6 +299,8 @@ services:
             - DEBUG
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${TWITTER_REQS}
             - SFM_UID
             - SFM_GID
@@ -315,6 +328,8 @@ services:
             - DEBUG_WARCPROX
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${FLICKR_REQS}
             - HARVEST_TRIES=${FLICKR_HARVEST_TRIES}
             - SFM_UID
@@ -341,6 +356,8 @@ services:
             - TZ
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${FLICKR_REQS}
             - SFM_UID
             - SFM_GID
@@ -367,6 +384,8 @@ services:
             - DEBUG_WARCPROX
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${WEIBO_REQS}
             - HARVEST_TRIES=${WEIBO_HARVEST_TRIES}
             - SFM_UID
@@ -394,6 +413,8 @@ services:
             - DEBUG
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${WEIBO_REQS}
             - SFM_UID
             - SFM_GID
@@ -421,6 +442,8 @@ services:
             - DEBUG_WARCPROX
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${TUMBLR_REQS}
             - HARVEST_TRIES=${TUMBLR_HARVEST_TRIES}
             - SFM_UID
@@ -447,6 +470,8 @@ services:
             - DEBUG
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
             - SFM_REQS=${TUMBLR_REQS}
             - SFM_UID
             - SFM_GID
