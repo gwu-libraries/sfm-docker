@@ -84,6 +84,8 @@ services:
             - SFM_RABBITMQ_HOST
             - SFM_RABBITMQ_PORT
             - SFM_POSTGRES_PASSWORD
+            - SFM_POSTGRES_HOST
+            - SFM_POSTGRES_PORT
             # To have some test accounts created.
             - LOAD_FIXTURES=${LOAD_FIXTURES}
             - SFM_REQS=${UI_REQS}
@@ -163,6 +165,8 @@ services:
             - SFM_RABBITMQ_HOST
             - SFM_RABBITMQ_PORT
             - SFM_POSTGRES_PASSWORD
+            - SFM_POSTGRES_HOST
+            - SFM_POSTGRES_PORT
             - SFM_REQS=${UI_REQS}
             - SFM_UID
             - SFM_GID

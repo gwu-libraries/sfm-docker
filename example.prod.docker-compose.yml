@@ -3,7 +3,7 @@ services:
     db:
         image: gwul/sfm-ui-db:2.3.0
         environment:
-            - POSTGRES_PASSWORD
+            - SFM_POSTGRES_PASSWORD
             - TZ
         logging:
             driver: json-file
@@ -84,7 +84,9 @@ services:
             - SFM_RABBITMQ_HOST
             - SFM_RABBITMQ_PORT
             - SFM_RABBITMQ_MANAGEMENT_PORT
-            - POSTGRES_PASSWORD
+            - SFM_POSTGRES_PASSWORD
+            - SFM_POSTGRES_HOST
+            - SFM_POSTGRES_PORT
             # To have some test accounts created.
             - LOAD_FIXTURES=False
             - SFM_REQS=release
@@ -160,7 +162,9 @@ services:
             - SFM_RABBITMQ_PASSWORD
             - SFM_RABBITMQ_HOST
             - SFM_RABBITMQ_PORT
-            - POSTGRES_PASSWORD
+            - SFM_POSTGRES_PASSWORD
+            - SFM_POSTGRES_HOST
+            - SFM_POSTGRES_PORT
             - SFM_REQS=release
             - SFM_UID
             - SFM_GID
