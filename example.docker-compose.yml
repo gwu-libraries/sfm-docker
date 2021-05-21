@@ -3,7 +3,7 @@ services:
     db:
         image: gwul/sfm-ui-db:master
         environment:
-            - SFM_POSTGRES_PASSWORD
+            - POSTGRES_PASSWORD=${SFM_POSTGRES_PASSWORD}
             - TZ
         logging:
             driver: json-file

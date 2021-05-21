@@ -3,7 +3,7 @@ services:
     db:
         image: gwul/sfm-ui-db:2.3.0
         environment:
-            - SFM_POSTGRES_PASSWORD
+            - POSTGRES_PASSWORD=${SFM_POSTGRES_PASSWORD}
             - TZ
         logging:
             driver: json-file
@@ -18,7 +18,7 @@ services:
         hostname: mq
         ports:
             # Opens up the ports for RabbitMQ management
-            - "${RABBITMQ_MANAGEMENT_PORT}:15672"
+            - "${SFM_RABBITMQ_MANAGEMENT_PORT}:15672"
         environment:
             - RABBITMQ_DEFAULT_USER=${SFM_RABBITMQ_USER}
             - RABBITMQ_DEFAULT_PASS=${SFM_RABBITMQ_PASSWORD}
