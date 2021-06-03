@@ -95,7 +95,11 @@ services:
             # To have some test accounts created.
             - LOAD_FIXTURES=${LOAD_FIXTURES}
             - SFM_REQS=${UI_REQS}
-            - DATA_VOLUME_THRESHOLD
+            - DATA_VOLUME_THRESHOLD_DB
+            - DATA_VOLUME_THRESHOLD_MQ
+            - DATA_VOLUME_THRESHOLD_EXPORT
+            - DATA_VOLUME_THRESHOLD_CONTAINERS
+            - DATA_VOLUME_THRESHOLD_COLLECTION_SET
             - PROCESSING_VOLUME_THRESHOLD
             - SFM_UID
             - SFM_GID
