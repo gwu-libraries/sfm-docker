@@ -101,6 +101,9 @@ services:
             - DATA_VOLUME_THRESHOLD_CONTAINERS
             - DATA_VOLUME_THRESHOLD_COLLECTION_SET
             - PROCESSING_VOLUME_THRESHOLD
+            - DATA_SHARED_USED
+            - DATA_SHARED_DIR
+            - DATA_THRESHOLD_SHARED 
             - SFM_UID
             - SFM_GID
             - SFM_UPGRADE_REQS=${UPGRADE_REQS}
@@ -127,6 +130,8 @@ services:
             - data
             - processingdata
 #        volumes:
+#           #  Uncomment to use DATA_SHARED_DIR and monitor space usage when data on single filesystem
+#           #- "${DATA_SHARED_DIR}:/sfm-data-shared"
 #            - "../sfm-ui:/opt/sfm-ui"
 #            # To also link in a local sfm-utils, uncomment this and set UI_REQS to "dev" in .env
 #            - "../sfm-utils:/opt/sfm-utils"

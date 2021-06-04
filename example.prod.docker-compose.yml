@@ -100,6 +100,9 @@ services:
             - DATA_VOLUME_THRESHOLD_CONTAINERS
             - DATA_VOLUME_THRESHOLD_COLLECTION_SET
             - PROCESSING_VOLUME_THRESHOLD
+            - DATA_SHARED_USED
+            - DATA_SHARED_DIR
+            - DATA_THRESHOLD_SHARED
             - SFM_UID
             - SFM_GID
             - SFM_INSTITUTION_NAME
@@ -124,6 +127,9 @@ services:
         volumes_from:
             - data
             - processingdata
+#      Uncomment to use DATA_SHARED_DIR and monitor space usage when data on single filesystem
+#        volumes:
+#            - "${DATA_SHARED_DIR}:/sfm-data-shared"
         restart: always
 #    # For running SFM with HTTPS
 #    # When using this, in .env, SFM_PORT must be 8080 and USE_HTTPS must be True.
