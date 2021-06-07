@@ -129,9 +129,10 @@ services:
         volumes_from:
             - data
             - processingdata
-#        volumes:
-#           #  Uncomment to use DATA_SHARED_DIR and monitor space usage when data on single filesystem
-#           #- "${DATA_SHARED_DIR}:/sfm-data-shared"
+        # Comment out volumes if SFM data is stored on mounted filesystems and DATA_SHARED_USED is False.
+        volumes:
+            - "${DATA_SHARED_DIR}:/sfm-data-shared"
+            # To link in local sfm-ui code, uncomment this 
 #            - "../sfm-ui:/opt/sfm-ui"
 #            # To also link in a local sfm-utils, uncomment this and set UI_REQS to "dev" in .env
 #            - "../sfm-utils:/opt/sfm-utils"

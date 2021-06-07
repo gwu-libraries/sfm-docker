@@ -127,9 +127,9 @@ services:
         volumes_from:
             - data
             - processingdata
-#      Uncomment to use DATA_SHARED_DIR and monitor space usage when data on single filesystem
-#        volumes:
-#            - "${DATA_SHARED_DIR}:/sfm-data-shared"
+#       # Comment out volumes section if SFM data is stored on mounted filesystems and DATA_SHARED_USED is False.
+        volumes:
+            - "${DATA_SHARED_DIR}:/sfm-data-shared"
         restart: always
 #    # For running SFM with HTTPS
 #    # When using this, in .env, SFM_PORT must be 8080 and USE_HTTPS must be True.
