@@ -40,6 +40,9 @@ services:
              - ${DATA_VOLUME_EXPORT}
              - ${DATA_VOLUME_CONTAINERS}
              - ${DATA_VOLUME_COLLECTION_SET}
+             # For SFM instances installed on 2.3.0 or earlier
+             # - ${DATA_VOLUME_FORMER_COLLECTION_SET
+             # - ${DATA_VOLUME_FORMER_EXPORT}
         environment:
             - TZ
             - SFM_UID
