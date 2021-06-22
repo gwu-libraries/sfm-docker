@@ -3,7 +3,7 @@ services:
     db:
         image: gwul/sfm-ui-db:master
         environment:
-            - SFM_POSTGRES_PASSWORD
+            - POSTGRES_PASSWORD=${SFM_POSTGRES_PASSWORD}
             - TZ
         logging:
             driver: json-file
@@ -35,7 +35,14 @@ services:
     data:
         image: gwul/sfm-data:master
         volumes:
-             - ${DATA_VOLUME}
+             - ${DATA_VOLUME_MQ}
+             - ${DATA_VOLUME_DB}
+             - ${DATA_VOLUME_EXPORT}
+             - ${DATA_VOLUME_CONTAINERS}
+             - ${DATA_VOLUME_COLLECTION_SET}
+             # For SFM instances installed on 2.3.0 or earlier
+             #- ${DATA_VOLUME_FORMER_COLLECTION_SET}
+             #- ${DATA_VOLUME_FORMER_EXPORT}
         environment:
             - TZ
             - SFM_UID
@@ -86,11 +93,20 @@ services:
             - SFM_POSTGRES_PASSWORD
             - SFM_POSTGRES_HOST
             - SFM_POSTGRES_PORT
+            - SFM_RABBITMQ_MANAGEMENT_PORT
+            - SFM_POSTGRES_PASSWORD
             # To have some test accounts created.
             - LOAD_FIXTURES=${LOAD_FIXTURES}
             - SFM_REQS=${UI_REQS}
-            - DATA_VOLUME_THRESHOLD
+            - DATA_VOLUME_THRESHOLD_DB
+            - DATA_VOLUME_THRESHOLD_MQ
+            - DATA_VOLUME_THRESHOLD_EXPORT
+            - DATA_VOLUME_THRESHOLD_CONTAINERS
+            - DATA_VOLUME_THRESHOLD_COLLECTION_SET
             - PROCESSING_VOLUME_THRESHOLD
+            - DATA_SHARED_USED
+            - DATA_SHARED_DIR
+            - DATA_THRESHOLD_SHARED 
             - SFM_UID
             - SFM_GID
             - SFM_UPGRADE_REQS=${UPGRADE_REQS}
@@ -116,7 +132,10 @@ services:
         volumes_from:
             - data
             - processingdata
-#        volumes:
+        # Comment out volumes if SFM data is stored on mounted filesystems and DATA_SHARED_USED is False.
+        volumes:
+            - "${DATA_SHARED_DIR}:/sfm-data-shared"
+            # To link in local sfm-ui code, uncomment this 
 #            - "../sfm-ui:/opt/sfm-ui"
 #            # To also link in a local sfm-utils, uncomment this and set UI_REQS to "dev" in .env
 #            - "../sfm-utils:/opt/sfm-utils"

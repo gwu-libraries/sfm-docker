@@ -3,7 +3,7 @@ services:
     db:
         image: gwul/sfm-ui-db:2.3.0
         environment:
-            - SFM_POSTGRES_PASSWORD
+            - POSTGRES_PASSWORD=${SFM_POSTGRES_PASSWORD}
             - TZ
         logging:
             driver: json-file
@@ -18,7 +18,7 @@ services:
         hostname: mq
         ports:
             # Opens up the ports for RabbitMQ management
-            - "${RABBITMQ_MANAGEMENT_PORT}:15672"
+            - "${SFM_RABBITMQ_MANAGEMENT_PORT}:15672"
         environment:
             - RABBITMQ_DEFAULT_USER=${SFM_RABBITMQ_USER}
             - RABBITMQ_DEFAULT_PASS=${SFM_RABBITMQ_PASSWORD}
@@ -35,7 +35,14 @@ services:
     data:
         image: gwul/sfm-data:2.3.0
         volumes:
-             - ${DATA_VOLUME}
+             - ${DATA_VOLUME_MQ}
+             - ${DATA_VOLUME_DB}
+             - ${DATA_VOLUME_EXPORT}
+             - ${DATA_VOLUME_CONTAINERS}
+             - ${DATA_VOLUME_COLLECTION_SET}
+             # For SFM instances installed on 2.3.0 or earlier
+             # - ${DATA_VOLUME_FORMER_COLLECTION_SET}
+             # - ${DATA_VOLUME_FORMER_EXPORT}
         environment:
             - TZ
             - SFM_UID
@@ -90,8 +97,15 @@ services:
             # To have some test accounts created.
             - LOAD_FIXTURES=False
             - SFM_REQS=release
-            - DATA_VOLUME_THRESHOLD
+            - DATA_VOLUME_THRESHOLD_DB
+            - DATA_VOLUME_THRESHOLD_MQ
+            - DATA_VOLUME_THRESHOLD_EXPORT
+            - DATA_VOLUME_THRESHOLD_CONTAINERS
+            - DATA_VOLUME_THRESHOLD_COLLECTION_SET
             - PROCESSING_VOLUME_THRESHOLD
+            - DATA_SHARED_USED
+            - DATA_SHARED_DIR
+            - DATA_THRESHOLD_SHARED
             - SFM_UID
             - SFM_GID
             - SFM_INSTITUTION_NAME
@@ -116,6 +130,9 @@ services:
         volumes_from:
             - data
             - processingdata
+#       # Comment out volumes section if SFM data is stored on mounted filesystems and DATA_SHARED_USED is False.
+        volumes:
+            - "${DATA_SHARED_DIR}:/sfm-data-shared"
         restart: always
 #    # For running SFM with HTTPS
 #    # When using this, in .env, SFM_PORT must be 8080 and USE_HTTPS must be True.
