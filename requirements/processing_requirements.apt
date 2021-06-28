@@ -10,3 +10,4 @@ default-jre
 parallel
 jq
 curl
+libicu-dev
