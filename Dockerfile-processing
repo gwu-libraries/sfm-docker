@@ -33,14 +33,14 @@ RUN pip install .
 #Weibo
 RUN git clone https://github.com/gwu-libraries/sfm-weibo-harvester.git /opt/sfm-weibo-harvester
 WORKDIR /opt/sfm-weibo-harvester
-RUN git checkout 2.3.0
+RUN git checkout 2.4.0
 RUN pip install -r requirements/common.txt -r requirements/release.txt
 RUN pip install .
 
 # Tumblr
 RUN git clone https://github.com/gwu-libraries/sfm-tumblr-harvester.git /opt/sfm-tumblr-harvester
 WORKDIR /opt/sfm-tumblr-harvester
-RUN git checkout 2.3.0
+RUN git checkout 2.4.0
 RUN pip install -r requirements/common.txt -r requirements/release.txt
 RUN pip install .
 

@@ -1,7 +1,7 @@
 version: "2"
 services:
     db:
-        image: gwul/sfm-ui-db:2.3.0
+        image: gwul/sfm-ui-db:2.4.0
         environment:
             - POSTGRES_PASSWORD=${SFM_POSTGRES_PASSWORD}
             - TZ
@@ -14,7 +14,7 @@ services:
             - data
         restart: always
     mq:
-        image: gwul/sfm-rabbitmq:2.3.0
+        image: gwul/sfm-rabbitmq:2.4.0
         hostname: mq
         ports:
             # Opens up the ports for RabbitMQ management
@@ -33,14 +33,14 @@ services:
         restart: always
     # These containers will exit on startup. That's OK.
     data:
-        image: gwul/sfm-data:2.3.0
+        image: gwul/sfm-data:2.4.0
         volumes:
              - ${DATA_VOLUME_MQ}
              - ${DATA_VOLUME_DB}
              - ${DATA_VOLUME_EXPORT}
              - ${DATA_VOLUME_CONTAINERS}
              - ${DATA_VOLUME_COLLECTION_SET}
-             # For SFM instances installed on 2.3.0 or earlier
+             # For SFM instances installed on 2.4.0 or earlier
              # - ${DATA_VOLUME_FORMER_COLLECTION_SET}
              # - ${DATA_VOLUME_FORMER_EXPORT}
         environment:
@@ -55,7 +55,7 @@ services:
         environment:
             - TZ
     ui:
-        image: gwul/sfm-ui:2.3.0
+        image: gwul/sfm-ui:2.4.0
         ports:
             - "${SFM_PORT}:8080"
         links:
@@ -157,7 +157,7 @@ services:
 #            - "./server.key:/etc/nginx/certs/${SFM_HOSTNAME}.key"
 #        restart: always
     uiconsumer:
-        image: gwul/sfm-ui-consumer:2.3.0
+        image: gwul/sfm-ui-consumer:2.4.0
         links:
             - db:db
             - mq:mq
@@ -192,7 +192,7 @@ services:
         restart: always
 # Twitter
     twitterrestharvester:
-        image: gwul/sfm-twitter-rest-harvester:2.3.0
+        image: gwul/sfm-twitter-rest-harvester:2.4.0
         links:
             - mq:mq
         environment:
@@ -216,7 +216,7 @@ services:
             - data
         restart: always
     twitterpriorityrestharvester:
-        image: gwul/sfm-twitter-rest-harvester:2.3.0
+        image: gwul/sfm-twitter-rest-harvester:2.4.0
         links:
             - mq:mq
         environment:
@@ -240,7 +240,7 @@ services:
             - data
         restart: always
     twitterstreamharvester:
-        image: gwul/sfm-twitter-stream-harvester:2.3.0
+        image: gwul/sfm-twitter-stream-harvester:2.4.0
         links:
             - mq:mq
         environment:
@@ -263,7 +263,7 @@ services:
             - data
         restart: always
     twitterrestexporter:
-        image: gwul/sfm-twitter-rest-exporter:2.3.0
+        image: gwul/sfm-twitter-rest-exporter:2.4.0
         links:
             - mq:mq
             - ui:api
@@ -286,7 +286,7 @@ services:
             - data
         restart: always
     twitterstreamexporter:
-        image: gwul/sfm-twitter-stream-exporter:2.3.0
+        image: gwul/sfm-twitter-stream-exporter:2.4.0
         links:
             - mq:mq
             - ui:api
@@ -311,7 +311,7 @@ services:
 
 # FLICKR
     flickrharvester:
-        image: gwul/sfm-flickr-harvester:2.3.0
+        image: gwul/sfm-flickr-harvester:2.4.0
         links:
             - mq:mq
         environment:
@@ -334,7 +334,7 @@ services:
             - data
         restart: always
     flickrexporter:
-        image: gwul/sfm-flickr-exporter:2.3.0
+        image: gwul/sfm-flickr-exporter:2.4.0
         links:
             - mq:mq
             - ui:api
@@ -358,7 +358,7 @@ services:
         restart: always
 # WEIBO
     weiboharvester:
-        image: gwul/sfm-weibo-harvester:2.3.0
+        image: gwul/sfm-weibo-harvester:2.4.0
         links:
             - mq:mq
         environment:
@@ -381,7 +381,7 @@ services:
             - data
         restart: always
     weiboexporter:
-        image: gwul/sfm-weibo-exporter:2.3.0
+        image: gwul/sfm-weibo-exporter:2.4.0
         links:
             - mq:mq
             - ui:api
@@ -406,7 +406,7 @@ services:
 
 # TUMBLR
     tumblrharvester:
-        image: gwul/sfm-tumblr-harvester:2.3.0
+        image: gwul/sfm-tumblr-harvester:2.4.0
         links:
             - mq:mq
         environment:
@@ -429,7 +429,7 @@ services:
             - data
         restart: always
     tumblrexporter:
-        image: gwul/sfm-tumblr-exporter:2.3.0
+        image: gwul/sfm-tumblr-exporter:2.4.0
         links:
             - mq:mq
             - ui:api
@@ -455,7 +455,7 @@ services:
 # PROCESSING
     # This container will exit on startup. That's OK.
     processing:
-        image: gwul/sfm-processing:2.3.0
+        image: gwul/sfm-processing:2.4.0
         links:
             - ui:api
         environment:
