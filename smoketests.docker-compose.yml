@@ -10,5 +10,4 @@ services:
             - DEBUG
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
-        volumes:
-            - ".:/opt/sfm-test"
+
