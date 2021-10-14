@@ -1,7 +1,7 @@
 version: "2"
 services:
     smoketests:
-        image: gwul/sfm-docker-smoke
+        image: gwul/sfm-docker-smoke:master
         links:
             - mq:mq
             - ui:ui
