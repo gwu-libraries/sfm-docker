@@ -28,6 +28,7 @@ class MqSmokeTest(unittest.TestCase):
                                                      "twitter_harvester",
                                                      "twitter_rest_harvester",
                                                      "twitter_rest_harvester_priority",
+                                                     "twitter_rest_exporter",
                                                      "twitter_stream_exporter",
                                                      "tumblr_harvester",
                                                      "tumblr_exporter"])))
