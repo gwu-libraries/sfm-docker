@@ -1,7 +1,7 @@
 version: "2"
 services:
     smoketests:
-        image: gwul/sfm-docker-smoke:t1082
+        image: gwul/sfm-docker-smoke
         links:
             - mq:mq
             - ui:ui
@@ -10,3 +10,5 @@ services:
             - DEBUG
             - SFM_RABBITMQ_USER
             - SFM_RABBITMQ_PASSWORD
+        volumes:
+            - ".:/opt/sfm-test"
