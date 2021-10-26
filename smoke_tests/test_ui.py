@@ -8,6 +8,7 @@ class UiSmokeTest(unittest.TestCase):
         with pyvirtualdisplay.Display():
             browser = Browser()
             browser.visit("http://ui:8080")
+            self.assertTrue(browser.find_by_text("Social Feed Manager"))
 
     def test_login(self):
         with pyvirtualdisplay.Display():
@@ -16,7 +17,7 @@ class UiSmokeTest(unittest.TestCase):
             browser.fill("login", "testuser")
             browser.fill("password", "password")
             browser.find_by_css(".btn-primary").click()
-            self.assertTrue(browser.find_by_text("Successfully signed in as testuser."))
+            self.assertTrue(browser.is_text_present("Successfully signed in as testuser.", wait_time=1))
 
     def test_admin_login(self):
         with pyvirtualdisplay.Display():
