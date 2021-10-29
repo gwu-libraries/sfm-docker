@@ -5,6 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # This pre-fetches the most recent requirements.apt.
 ADD requirements/processing_requirements.apt /opt/sfm-setup/
 RUN apt-get update
+# Necessary to install Python 3.8 on Ubuntu 18
 RUN apt-get install -y software-properties-common 
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN cat /opt/sfm-setup/processing_requirements.apt | tr "\n" " " | xargs apt-get install -y
@@ -14,6 +15,7 @@ RUN ln -s /usr/bin/python3.8 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
 
 #Upgrade pip
+#Calling pip via Python to make sure the correct version is used
 RUN python -m pip install --upgrade pip
 #Avoid the warning of https
 RUN python -m pip install --upgrade ndg-httpsclient
