@@ -48,7 +48,7 @@ services:
             - SFM_UID
             - SFM_GID
     processingdata:
-        image: debian:jessie
+        image: debian:buster
         command: /bin/true
         volumes:
              - ${PROCESSING_VOLUME}
