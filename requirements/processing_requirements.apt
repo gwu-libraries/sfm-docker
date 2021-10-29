@@ -1,6 +1,7 @@
 wget
 zip
-python3-dev
+python3.8
+python3.8-dev
 python3-pip
 vim
 git
@@ -11,3 +12,7 @@ parallel
 jq
 curl
 libicu-dev
+autoconf 
+automake
+pkg-config
+libtool

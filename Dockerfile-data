@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:buster
 MAINTAINER Social Feed Manager <sfm@gwu.edu>
 
 ARG DEBIAN_FRONTEND=noninteractive
