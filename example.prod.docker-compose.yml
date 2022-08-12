@@ -304,6 +304,7 @@ services:
             - SFM_UID
             - SFM_GID
             - SFM_UPGRADE_REQS=${UPGRADE_REQS}
+            - MAX_DATAFRAME_ROWS
         logging:
             driver: json-file
             options:
