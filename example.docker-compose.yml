@@ -311,6 +311,37 @@ services:
 #            - "../sfm-twitter-harvester:/opt/sfm-twitter-harvester"
 #            - "../sfm-utils:/opt/sfm-utils"
 #            - "../warcprox:/opt/warcprox"
+    twitterrestexporter2:
+        image: gwul/sfm-twitter-rest-exporter-v2:master
+        #build:
+        #    context: ../sfm-twitter-harvester
+        #    dockerfile: Dockerfile-rest-exporter-v2
+        links:
+            - mq:mq
+            - ui:api
+        environment:
+            - TZ
+            - DEBUG
+            - SFM_RABBITMQ_USER
+            - SFM_RABBITMQ_PASSWORD
+            - SFM_RABBITMQ_HOST
+            - SFM_RABBITMQ_PORT
+            - SFM_REQS=${TWITTER_REQS}
+            - SFM_UID
+            - SFM_GID
+            - SFM_UPGRADE_REQS=${UPGRADE_REQS}
+            - MAX_DATAFRAME_ROWS
+        logging:
+            driver: json-file
+            options:
+                max-size: ${DOCKER_LOG_MAX_SIZE}
+                max-file: ${DOCKER_LOG_MAX_FILE}
+        volumes_from:
+            - data
+        volumes:
+           # - "../sfm-twitter-harvester:/opt/sfm-twitter-harvester"
+           # - "../sfm-utils:/opt/sfm-utils"
+           # - "../warcprox:/opt/warcprox"
     twitterstreamexporter:
         image: gwul/sfm-twitter-stream-exporter:master
         links:
