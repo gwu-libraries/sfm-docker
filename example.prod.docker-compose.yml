@@ -119,6 +119,7 @@ services:
             - SFM_WEIBO_SEARCH_OPTION
             - SFM_USE_HTTPS
             - SFM_USE_ELB
+            - TWITTER_COLLECTION_TYPES
             # For ngninx-proxy
             - VIRTUAL_HOST=${SFM_HOSTNAME}
             - VIRTUAL_PORT=${SFM_PORT}
