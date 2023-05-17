@@ -504,7 +504,7 @@ services:
 # PROCESSING
     # This container will exit on startup. That's OK.
     processing:
-        image: gwul/sfm-processing:3.0.0
+        image: gwul/sfm-processing:2.5.0
         links:
             - ui:api
         environment:
